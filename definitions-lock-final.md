@@ -13,6 +13,11 @@ The 2018-19 boundary is a data-availability limit, not a design choice. PuckPedi
 ## Locked definitions
 
 - Convert: a player who was in an NHL training camp on a professional tryout and signed a standard NHL contract with that club during the same season, and played at least one NHL game for that club that season.
+- Cross-club conversions do not count. A player on a tryout with one club
+  who signs with a different club that season is not a convert. The tryout
+  club and signing club must match. Erik Gustafsson is the worked example:
+  on a tryout with the Islanders in 2021-22, signed with Chicago October 11,
+  excluded.
 - Played at least one NHL game: the roster test. It replaces the opening-night active roster rule, which the NHL API does not serve for historical seasons.
 - Survived: on an NHL roster at the one-year mark, defined as opening night of the following season.
 - Moved: on a different NHL team's roster at the one-year mark.
