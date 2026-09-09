@@ -1,0 +1,54 @@
+season,player,sign_team,position,sign_age,sign_date,level,sign_status,structure,tracker_confirmed,window_class,played_for_club,one_year_state,one_year_team,back_on_pto,notes,first_five_cutoff,made_roster
+2018-19,Luca Sbisa,NYI,D,28,2018-09-24,STD,UFA,1-Way,,convert,yes,,,,,2018-10-28,yes
+2018-19,Mark Letestu,CBJ,C,33,2018-09-27,STD,UFA,2-Way,,convert,yes,,,,,2018-10-27,no
+2018-19,Alex Chiasson,EDM,RW,27,2018-10-02,STD,UFA,1-Way,,convert,yes,,,,known EDM tryout convert,2018-10-28,yes
+2018-19,Drew Stafford,NJD,RW,32,2018-10-05,STD,UFA,1-Way,,convert,yes,,,,,2018-11-01,yes
+2019-20,Ben Hutton,LAK,D,26,2019-09-17,STD,UFA No QO,1-Way,,convert,yes,,,,ADDED by widened window; verify tryout status,2019-10-24,yes
+2019-20,Fredrik Claesson,CAR,D,26,2019-09-17,STD,UFA No QO,2-Way,,convert,no,,,,ADDED by widened window; verify tryout status,2019-10-24,no
+2019-20,Alexander Petrovic,BOS,D,27,2019-09-26,STD,UFA,2-Way,,convert,no,,,,,2019-10-26,no
+2019-20,Scott Sabourin,OTT,RW,27,2019-09-27,STD,UFA,2-Way,,convert,yes,,,,,2019-10-25,yes
+2019-20,Tobias Rieder,CGY,C,26,2019-09-28,STD,UFA No QO,2-Way,,convert,yes,,,,,2019-10-20,yes
+2019-20,Zac Rinaldo,CGY,C,29,2019-09-29,STD,UFA,2-Way,,convert,yes,,,,,2019-10-20,no
+2019-20,Micheal Haley,NYR,C,33,2019-09-30,STD,UFA,2-Way,,convert,yes,,,,,2019-10-29,yes
+2021-22,Max McCormick,SEA,LW,29,2021-09-29,STD,UFA,2-Way,,convert,yes,,,,,2021-11-01,yes
+2021-22,J-F Berube,CBJ,G,30,2021-09-30,STD,UFA,2-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-06,no
+2021-22,Alex Galchenyuk,ARI,C,27,2021-10-05,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-02,no
+2021-22,Tyler Ennis,OTT,RW,32,2021-10-07,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-04,yes
+2021-22,Frederik Gauthier,NJD,C,26,2021-10-09,STD,UFA No QO,2-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-06,yes
+2021-22,James Neal,STL,LW,34,2021-10-09,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed; repeat see 2022-23 CBJ tryout list,2021-11-07,yes
+2021-22,Jack Johnson,COL,D,34,2021-10-10,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-06,yes
+2021-22,Jimmy Vesey,NJD,LW,28,2021-10-10,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed; repeat see 2022-23 NYR,2021-11-06,yes
+2021-22,Alex Chiasson,VAN,RW,31,2021-10-12,STD,UFA,1-Way,,convert,yes,,,,repeat see 2018-19 EDM,2021-11-02,yes
+2021-22,Brian Boyle,PIT,C,36,2021-10-12,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed; repeat see 2019-20 FLA,2021-11-06,yes
+2021-22,Colton Sceviour,EDM,C,32,2021-10-13,STD,UFA,2-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-05,yes
+2022-23,Brett Ritchie,CGY,RW,29,2022-09-21,STD,UFA,1-Way,,convert,yes,,,,ADDED by widened window; previously dropped as early-camp; verify,2022-11-05,yes
+2022-23,Cory Schneider,NYI,G,36,2022-09-21,STD,UFA,2-Way,,convert,no,,,,ADDED by widened window; previously dropped as early-camp; verify,2022-11-01,no
+2022-23,Nikita Soshnikov,NYI,RW,28,2022-09-21,STD,UFA No QO,1-Way,,convert,yes,,,,ADDED by widened window; previously dropped as early-camp; verify,2022-11-01,yes
+2022-23,Scott Harrington,SJS,D,29,2022-09-30,STD,UFA,2-Way,yes,convert,yes,,,,,2022-10-27,yes
+2022-23,Calvin de Haan,CAR,D,31,2022-10-01,STD,UFA,1-Way,yes,convert,yes,,,,AUDIT Waddell CAR at the time - correct,2022-11-03,yes
+2022-23,Nathan Beaulieu,ANA,D,29,2022-10-01,STD,UFA,1-Way,yes,convert,yes,,,,,2022-11-01,yes
+2022-23,Daniel Sprong,SEA,LW,25,2022-10-03,STD,UFA No QO,2-Way,yes,convert,yes,,,,,2022-10-29,yes
+2022-23,Jimmy Vesey,NYR,LW,29,2022-10-09,STD,UFA,1-Way,yes,convert,yes,,,,repeat see 2021-22 NJD,2022-10-30,yes
+2022-23,Pierre-Cedric Labrie,TBL,LW,36,2022-10-09,STD,UFA,2-Way,no,convert,no,,,,UNCONFIRMED,2022-11-01,no
+2022-23,Zach Aston-Reese,TOR,C,28,2022-10-09,STD,UFA,1-Way,yes,convert,yes,,,,,2022-10-30,yes
+2022-23,Derick Brassard,OTT,C,35,2022-10-10,STD,UFA,1-Way,yes,convert,yes,,,,UNCONFIRMED; CONFIRMED PTO OTT; awarded 1yr after camp,2022-11-03,yes
+2022-23,Anton Stralman,BOS,D,36,2022-10-11,STD,UFA,1-Way,yes,convert,yes,,,,UNCONFIRMED; CONFIRMED PTO BOS Sep 23; signed 1yr $1M Oct 12,2022-11-01,yes
+2022-23,Derek Stepan,CAR,C,32,2022-10-11,STD,UFA,1-Way,yes,convert,yes,,,,AUDIT Waddell CAR at the time - correct,2022-11-03,yes
+2022-23,Michael Stone,CGY,D,32,2022-10-11,STD,UFA,2-Way,yes,convert,yes,,,,,2022-11-05,yes
+2023-24,Colin White,PIT,C,26,2023-10-07,STD,UFA No QO,2-Way,,convert,yes,,,,,2023-11-04,no
+2023-24,Maxwell Willman,NJD,C,28,2023-10-07,STD,UFA,2-Way,,convert,yes,,,,,2023-11-03,no
+2023-24,Austin Watson,TBL,LW,31,2023-10-09,STD,UFA,1-Way,,convert,yes,,,,,2023-11-02,yes
+2023-24,Noah Gregor,TOR,LW,25,2023-10-10,STD,UFA No QO,1-Way,,convert,yes,,,,AUDIT Treliving moved CGY to TOR May 2023 - TOR correct,2023-11-02,yes
+2024-25,Kevin Lankinen,VAN,G,29,2024-09-21,STD,UFA,1-Way,,convert,yes,,,,ADDED by widened window; verify tryout status,2024-11-02,yes
+2024-25,Eetu Makiniemi,PHI,G,25,2024-09-24,STD,UFA G6,2-Way,yes,convert,no,,,,"ADDED by widened window; CONFIRMED PTO from Aug 29, signed Sep 24 (PHR tracker); FALSE NEGATIVE of the old window",2024-10-29,no
+2024-25,Tyson Barrie,CGY,D,33,2024-10-03,STD,UFA,1-Way,yes,convert,yes,,,,"CONFIRMED PTO CGY (Daily Faceoff, PHR)",2024-10-30,yes
+2024-25,Tanner Pearson,VGK,LW,32,2024-10-04,STD,UFA,1-Way,yes,convert,yes,,,,CONFIRMED PTO VGK; PHR signed Oct 4,2024-10-28,yes
+2024-25,Kevin Labanc,CBJ,RW,28,2024-10-05,STD,UFA,1-Way,yes,convert,yes,,,,AUDIT Waddell moved CAR to CBJ May 2024 - CBJ correct; CONFIRMED PTO CBJ (Daily Faceoff),2024-11-01,yes
+2024-25,Kailer Yamamoto,UTA,RW,26,2024-10-06,STD,UFA No QO,2-Way,yes,convert,yes,,,,CONFIRMED PTO UTA (Daily Faceoff),2024-10-28,yes
+2024-25,Austin Watson,DET,LW,32,2024-10-07,STD,UFA,2-Way,yes,convert,yes,,,,repeat see 2023-24 TBL; CONFIRMED PTO DET; PHR signed Oct 7,2024-10-30,yes
+2024-25,Cameron Wright,EDM,RW,26,2024-10-07,STD,UFA No QO,2-Way,,convert,no,,,,GM CORRECTED Stan Bowman moved CHI to EDM Jul 2024,2024-10-28,no
+2024-25,Jakub Vrana,WSH,LW,28,2024-10-07,STD,UFA,1-Way,yes,convert,yes,,,,CONFIRMED PTO WSH; PHR signed Oct 8,2024-11-02,yes
+2024-25,Max Pacioretty,TOR,LW,35,2024-10-07,STD,UFA,1-Way,yes,convert,yes,,,,AUDIT Treliving TOR - correct; CONFIRMED PTO TOR Sep 11,2024-10-28,yes
+2024-25,Steven Lorentz,TOR,C,28,2024-10-07,STD,UFA,1-Way,yes,convert,yes,,,,AUDIT Treliving TOR - correct; CONFIRMED PTO TOR; PHR signed Oct 7,2024-10-28,yes
+2024-25,Travis Dermott,EDM,D,27,2024-10-08,STD,UFA,2-Way,yes,convert,yes,,,,GM CORRECTED Stan Bowman moved CHI to EDM Jul 2024; played 10 GP EDM; CONFIRMED PTO (Daily Faceoff),2024-10-28,yes
+2024-25,Gustav Lindstrom,MTL,D,25,2024-10-09,STD,UFA No QO,2-Way,,convert,no,,,,,2024-10-29,no
