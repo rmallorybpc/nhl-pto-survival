@@ -102,5 +102,3 @@ Known noise pattern: a single team signing several veterans late at or near mini
   October 11, excluded. Decided before the remaining seasons were verified.
 - sign_team corrected for two 2024-25 rows. Derived from signing GM, which
   broke when Stan Bowman moved from Chicago to Edmonton in July 2024.
-- 2020-21 moved from excluded to included with notes.
-- Scope reduced from ten seasons to six. Reason: data availability at 2018-19.
