@@ -89,8 +89,18 @@ Known noise pattern: a single team signing several veterans late at or near mini
 
 ## Change log
 
-Superseded from the provisional lock:
-- Made the roster changed from opening-night active roster to played at least one NHL game for the signing club. Reason: API cannot serve historical opening-night active rosters, and the first-five-games alternative collided with folding in late signers.
+- Made the roster changed from opening-night active roster to played at
+  least one NHL game for the signing club. Reason: API cannot serve
+  historical opening-night active rosters, and the first-five-games
+  alternative collided with folding in late signers.
 - Late signers moved from undecided to folded into the primary.
+- 2020-21 moved from excluded to included with notes.
+- Scope reduced from ten seasons to six. Reason: data availability at 2018-19.
+- Same-club rule made explicit. A player on a tryout with one club who signs
+  with a different club that season is not a convert. Erik Gustafsson is the
+  worked example: tryout with the Islanders in 2021-22, signed with Chicago
+  October 11, excluded. Decided before the remaining seasons were verified.
+- sign_team corrected for two 2024-25 rows. Derived from signing GM, which
+  broke when Stan Bowman moved from Chicago to Edmonton in July 2024.
 - 2020-21 moved from excluded to included with notes.
 - Scope reduced from ten seasons to six. Reason: data availability at 2018-19.
