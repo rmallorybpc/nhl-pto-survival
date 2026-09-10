@@ -10,6 +10,17 @@ season,player,sign_team,position,sign_age,sign_date,level,sign_status,structure,
 2019-20,Tobias Rieder,CGY,C,26,2019-09-28,STD,UFA No QO,2-Way,,convert,yes,,,,,2019-10-20,yes
 2019-20,Zac Rinaldo,CGY,C,29,2019-09-29,STD,UFA,2-Way,,convert,yes,,,,,2019-10-20,no
 2019-20,Micheal Haley,NYR,C,33,2019-09-30,STD,UFA,2-Way,,convert,yes,,,,,2019-10-29,yes
+2020-21,Riley Sheahan,BUF,C,29,2021-01-08,STD,UFA,1-Way,yes,convert,yes,,,,PTO BUF; NHL.com tracker confirms signing,2021-01-31,yes
+2020-21,Michael Del Zotto,CBJ,D,30,2021-01-10,STD,UFA,2-Way,yes,convert,yes,,,,PTO CBJ; tracker notes 1yr 2-way Jan 10,2021-01-31,yes
+2020-21,Frederik Gauthier,ARI,C,25,2021-01-11,STD,UFA No QO,2-Way,yes,convert,yes,,,,PTO ARI; tracker notes 1yr 2-way Jan 11,2021-02-04,no
+2020-21,Mike Hoffman,STL,LW,30,2021-01-11,STD,UFA,1-Way,yes,convert,yes,,,,PTO STL; tracker notes 1yr Jan 11,2021-02-02,yes
+2020-21,Travis Hamonic,VAN,D,30,2021-01-12,STD,UFA,1-Way,yes,convert,yes,,,,PTO VAN,2021-01-28,yes
+2020-21,Craig Anderson,WSH,G,39,2021-01-13,STD,UFA,1-Way,yes,convert,yes,,,,PTO WSH; dedupe - appears twice in export,2021-02-01,no
+2020-21,Devin Shore,EDM,C,26,2021-01-13,STD,UFA No QO,2-Way,yes,convert,yes,,,,PTO EDM,2021-01-30,yes
+2020-21,Kevin Connauton,FLA,D,30,2021-01-13,STD,UFA,2-Way,yes,convert,yes,,,,PTO FLA,2021-02-09,no
+2020-21,Trevor Lewis,WPG,C,34,2021-01-13,STD,UFA,1-Way,yes,convert,yes,,,,PTO WPG,2021-02-02,yes
+2020-21,Brett Ritchie,CGY,RW,27,2021-01-17,STD,UFA No QO,2-Way,yes,late,yes,,,,PTO CGY; check vs CGY opener,2021-02-04,no
+2020-21,Michael Stone,CGY,D,30,2021-01-18,STD,UFA,2-Way,yes,late,yes,,,,PTO CGY; check vs CGY opener,2021-02-04,no
 2021-22,Max McCormick,SEA,LW,29,2021-09-29,STD,UFA,2-Way,,convert,yes,,,,,2021-11-01,yes
 2021-22,J-F Berube,CBJ,G,30,2021-09-30,STD,UFA,2-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-06,no
 2021-22,Alex Galchenyuk,ARI,C,27,2021-10-05,STD,UFA,1-Way,yes,convert,yes,,,,HFBoards confirmed,2021-11-02,no
