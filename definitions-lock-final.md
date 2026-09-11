@@ -1,108 +1,235 @@
-# NHL PTO survival: definitions lock (final)
+# NHL PTO convert survival: definitions lock
 
-Supersedes the provisional lock. All decisions settled. Any change from here is a decision and gets logged at the bottom.
+Authoritative reference for the study. Read this first. Any change from here
+is a decision and gets logged at the bottom.
+
+Status: analysis complete. Writing and the back-on-a-PTO count outstanding.
+
+## The claim
+
+Players who make an NHL roster out of camp on a professional tryout survive in
+the league at a lower rate one year later than comparable players who made the
+same rosters without a tryout.
 
 ## Scope
 
-Six cohorts: 2018-19, 2019-20, 2020-21, 2021-22, 2022-23, 2023-24, 2024-25.
+Seven cohorts: 2018-19, 2019-20, 2020-21, 2021-22, 2022-23, 2023-24, 2024-25.
 
-2025-26 is excluded. No one-year outcome exists until October 2026.
+2025-26 is excluded. No one-year outcome exists yet.
 
-The 2018-19 boundary is a data-availability limit, not a design choice. PuckPedia contract season filters do not run earlier. State it that way.
+The 2018-19 boundary is a data-availability limit, not a design choice.
+PuckPedia contract season filters do not run earlier. State it that way. The
+brief's rough ten-season scope is not available.
 
 ## Locked definitions
 
-- Convert: a player who was in an NHL training camp on a professional tryout and signed a standard NHL contract with that club during the same season, and played at least one NHL game for that club that season.
-- Cross-club conversions do not count. A player on a tryout with one club
-  who signs with a different club that season is not a convert. The tryout
-  club and signing club must match. Erik Gustafsson is the worked example:
-  on a tryout with the Islanders in 2021-22, signed with Chicago October 11,
-  excluded.
-- Played at least one NHL game: the roster test. It replaces the opening-night active roster rule, which the NHL API does not serve for historical seasons.
-- Survived: on an NHL roster at the one-year mark, defined as opening night of the following season.
-- Moved: on a different NHL team's roster at the one-year mark.
-- Back on a PTO: in an NHL camp on a tryout the following season, whether or not it converted.
-- Censoring: the most recent completed season supports one-year outcomes only.
+- Convert: a player who was in an NHL training camp on a professional tryout,
+  signed a standard NHL contract with that same club on or before that club's
+  opening night, and appeared in at least one of that club's first ten
+  regular-season games.
+- Same-club rule. A player on a tryout with one club who signs with a different
+  club is not a convert. Erik Gustafsson is the worked example: tryout with the
+  Islanders in 2021-22, signed with Chicago October 11, excluded. Zach
+  Aston-Reese in 2023-24 is the second: tryout with Carolina, signed with
+  Detroit, excluded.
+- Late signers do not count. A player who signs with the tryout club after that
+  club's opening night is not a convert. The study is about making the team out
+  of camp.
+- Survived: appeared in any NHL club's first ten regular-season games of the
+  following season. Both ends of the study use the same ten-game rule, so entry
+  and exit are measured identically.
+- Moved: survived, but with a different club than the signing club.
+- Back on a PTO: in an NHL camp on a tryout the following season. NOT YET
+  COUNTED. See outstanding work.
 
-## Why the roster test changed
+## Why ten games, not five
 
-Two decisions collided. Late signers are folded into the primary, and the roster test was going to be "played in the first five games." Those are incompatible. Players who signed after their team's opener, such as Pitlick on October 25 and Sbisa on October 23, cannot appear in the first five games because those games were already played.
+The roster test was first built at five games. That run excluded three
+confirmed tryout converts who were healthy scratches in October: Chiasson, who
+then scored 22 goals for Edmonton in 2018-19, Brassard, and Yamamoto. All three
+were two or three days past the five-game cutoff.
 
-The one-game test resolves it. It applies uniformly to both groups and preserves the intent of the first-five rule, which was to catch players who made the roster but were a healthy scratch on opening night.
+Ten games recovers all three and still excludes every AHL assignment in the
+set. The four clearest removals hold at both thresholds: Letestu first appeared
+January 31, Berube February 20, White January 13, Rinaldo November 19.
 
-It also enforces the brief's existing rule that signing off a PTO and starting in the AHL does not count. Aston-Reese is the worked example: released from his Toronto tryout October 6, 2023, signed a two-way deal with Detroit October 8, assigned to Grand Rapids the next day. Signed off a tryout, never played, not a convert.
-
-## What folding in late signers costs
-
-The claim broadens. It is no longer "making the team out of camp on a PTO." It is "earning an NHL contract off a PTO and playing."
-
-Write the headline to match. Anything narrower will not be supported by the sample.
-
-## Season notes to publish alongside results
-
-**2020-21.** Included. Camps opened December 31 for the seven teams that did not participate in the 2019-20 Return to Play Plan and January 3 for the remaining 24, with the season starting January 13. There was a training camp. There were no preseason games. Since a tryout permits camp and exhibition play only, conversions that season happened on practice sessions alone, with no games to showcase in.
-
-Taxi squads of four to six players were in effect from the season's start. Taxi squad assignment counts toward the roster test. This season is the only cohort where that applies, because taxi squads did not return until December 26, 2021, well after that season's openers.
-
-Two effects run the same direction and do not cancel. The extra roster spots admit players who would have gone to the AHL in a normal year, so the convert count inflates and the cohort's average quality falls. Expect this cohort's survival rate to run low for structural reasons.
-
-Related: The Win Column reported 2020-21 as the most successful season for PTO players getting contracts. Treat that as a possible taxi squad artifact rather than a signal about tryouts, and say so.
-
-**2019-20.** Included with a note. Its one-year outcome resolves at opening night 2020-21, which was January 2021 under compressed rosters and taxi squads. The outcome is measurable but not comparable to other cohorts. Report it and flag it.
-
-## Analysis plan
-
-Primary: one-year survival rate for converts versus the matched comparator, each with a confidence interval, plus the differential with a confidence interval.
-
-Secondary: same team versus moved. Reported separately. A traded player still playing is not a failure.
-
-Secondary: back on a PTO the following season.
-
-Dropped, both conditional in the brief and both failing the n condition:
-- Logistic regression with age and prior workload covariates.
-- Three-year Kaplan-Meier curves.
-
-Expected n is roughly fifty to sixty converts across six cohorts. Intervals will run near plus or minus twelve points per group.
-
-## Null result
-
-Publishable. If the differential does not clear zero, that is the finding and it gets written as the finding, not buried or reframed.
-
-This is decided before any outcome is resolved. Record that fact in the writeup. It is the defense against the obvious criticism.
+Report this as a threshold chosen after a first pass showed five was too tight,
+not as a natural break in the data. A first look suggested a clean
+discontinuity at five games; widening to ten produced new marginal cases at the
+new boundary, which means the apparent gap was a property of where the line sat
+rather than structure in the data.
 
 ## Identification method
 
-Primary: the contract-date signature. Standard-level contracts, UFA or UFA with no qualifying offer, signed within roughly twelve days before the team's opener. Validated across 2019-20, 2021-22, 2022-23, 2023-24, and 2024-25.
+Two steps. Neither works alone.
 
-2020-21 exception. The signature fails there because free agency ran late into camp and no pre-camp trough exists. Assemble that season by hand from the NHL.com tryout tracker instead.
+**Step one, the contract-date signature.** Standard-level contracts, UFA or UFA
+with no qualifying offer, signed between camp opening and the club's opening
+night. Generates candidates.
 
-Confirmation: HFBoards annual training-camp threads record tryouts and their outcomes directly. Use these to confirm candidates and remove false positives. In 2021-22 they confirmed ten of the candidate set and excluded the four-player Islanders cluster, which were late free-agent signings rather than conversions.
+Near-zero false negatives on the contract requirement, since a player cannot
+appear without a contract on file. But the window boundary does produce misses:
+Claesson signed four days into camp in 2019 and Makiniemi five days into camp
+in 2024, and both were excluded by an earlier twelve-day window. The window was
+widened to camp opening for this reason.
 
-Known noise pattern: a single team signing several veterans late at or near minimum in a cap-tight year produces false positives. Verify any single-team cluster individually.
+**Step two, verification against tryout sources.** Required, not cleanup.
 
-## Data handling
+Two distinct false-positive modes make this necessary.
 
-- Deduplicate on player and signing date before counting. Craig Anderson appears twice in the 2020-21 export.
-- Opening night is team-specific. Build a per-season table of team opener dates. The window is team-relative and this is required.
-- Normalize names before matching across sources. Accents, hyphens, suffixes. Log every hand resolution.
-- All live data runs locally.
+Paperwork timing. PuckPedia's signing date is the NHL central registry filing
+date, not the date terms were agreed. Chara agreed September 18, 2021 and
+Parise in the summer; both show October 10 because Lamoriello filed on the
+roster deadline. Any club that files late produces false positives that are
+invisible in the data.
+
+Eve-of-camp signings and re-signings. Schneider, Soshnikov and Ritchie in
+2022-23 and Lankinen in 2024-25 all signed within days of camp opening and none
+was on a tryout. These are indistinguishable from early conversions without a
+tryout source.
+
+Of the six candidates signing within days of camp opening across all seasons,
+two were genuine converts and four were ordinary signings. The early edge of
+the window is where the method is weakest.
+
+**Sources.** HFBoards annual training-camp threads record tryouts with outcomes
+and are the best source found. NHL.com publishes an annual tryout page, curated
+to notable players. Pro Hockey Rumors and Daily Faceoff run trackers of varying
+quality by year. CapFriendly held the complete database and went dark in July
+2024; nothing replaced it retroactively.
+
+## 2020-21 season note
+
+Included. Camps opened December 31 for the seven teams that did not participate
+in the 2019-20 Return to Play Plan and January 3 for the remaining 24, with the
+regular season starting January 13.
+
+There was a training camp. There were no preseason games. Since a tryout
+permits camp and exhibition play only, conversions that season happened on
+practice sessions alone, with no games to showcase in.
+
+The contract-date signature does not work for this season. Free agency ran late
+into camp and no pre-camp trough exists, so normal signings and camp
+conversions are indistinguishable by date. This cohort was hand-assembled from
+the NHL.com tryout tracker, which lists fifteen tryouts with their outcomes.
+That list is curated to notable players, so completeness is lower for this
+season than for the others.
+
+Taxi squads of four to six players were in effect. Taxi squad assignment does
+NOT count toward the roster test. The same ten-game rule applies as in every
+other cohort. Craig Anderson is the worked example: signed January 13, waived,
+assigned to the Washington taxi squad, first appeared February 7, excluded.
+
+## Comparator
+
+For each convert, K comparators drawn from players who appeared in a club's
+first ten games that same season without a tryout.
+
+Matched on:
+- Position group exact (forward, defence, goaltender)
+- Age within 2 years
+- Prior-season NHL games played within 15
+
+K = 3. Comparators are used once per season and converts are excluded from
+every pool so they cannot match each other.
+
+Prior-season games played is the quality control and it must be a constraint,
+not a tiebreaker. A first specification matched on position and age alone with
+current-season games played as a tiebreaker. That produced comparators with a
+median of 82 games played and a minimum of 51, every one a full-time regular,
+and a spurious 47-point differential. Two errors caused it: the tiebreaker
+sorted descending, selecting the highest-games-played player at each age, and
+the variable was games played during the matched season, which is an outcome
+rather than a covariate.
+
+The corrected specification matches on the season before. Convert prior games
+played averages 39.8, comparators 40.1, medians 45 and 45. Both groups are
+part-time NHLers from the previous year.
+
+## Results
+
+One-year survival, 46 converts across seven cohorts:
+
+- Converts: 22/46 = 47.8% (95% CI 33.4 to 62.3)
+- Comparators: 96/137 = 70.1% (95% CI 62.4 to 77.7)
+- Differential: -22.2 points (95% CI -38.6 to -5.9)
+
+Sensitivity across nine configurations varying K, age window and games-played
+band: the differential ranges from -20.3 to -23.9 points. Every configuration
+clears zero. The tightest configuration, age within 1 and games played within
+10, gives the weakest result at -20.3 with an upper bound of -3.6.
+
+Fit durability, reported separately per the brief:
+
+- Same team at one year: 7 of 46 (15.2%)
+- Moved: 15 of 46
+- Out: 24 of 46
+
+Among survivors, better than two in three have changed clubs. A traded player
+still playing is not a failure, which is why this is reported apart from the
+survival result.
+
+Cohort-level survival is not a finding. Cohorts run from 2 to 12 players and
+the spread is noise. 2020-21 in particular resolves against 2021-22, a return
+to normal schedules and roster sizes, which would inflate survival for reasons
+unrelated to tryouts.
+
+## Dropped analyses
+
+Both were conditional on n in the brief and both fail that condition.
+
+- Logistic regression on the pooled matched sample with covariates.
+- Three-year Kaplan-Meier curves per group.
+
+Report one-year outcomes only and say why.
+
+## Null result
+
+Decided publishable before any outcome was resolved. Record that fact in the
+writeup; it is the defence against the obvious criticism. The result did clear
+zero, but the decision was made in advance either way.
+
+## Stated limitations
+
+- sign_team was derived from the signing GM field in the PuckPedia exports.
+  That is a proxy and it broke once, when Stan Bowman moved from Chicago to
+  Edmonton in July 2024. Rows checked against GM moves carry an AUDIT note.
+- Signing dates are registry filing dates, not agreement dates.
+- Camp opening dates are sourced for 2022-23 and 2020-21 only. The rest are
+  estimates and they determine which candidates enter the set.
+- Ben Hutton, 2019-20, could not be resolved either way as a tryout. One
+  unresolved case in 49.
+- 2020-21 candidates come from a curated list, so that cohort's completeness is
+  lower than the others.
+- Two PuckPedia views were used across seasons and they filter differently, one
+  on contract start year and one on contracts active in the season.
+
+## Outstanding work
+
+1. Count the back-on-a-PTO cell. The brief says to count it before writing any
+   framing. Needs tryout sources for the following season across seven cohorts.
+2. Resolve Yannick Weber, 2020-21: tryout with Nashville, signing GM field
+   points to Pittsburgh. Same pattern as Gustafsson if confirmed.
+3. Confirm the Letestu 2018-19 tryout club. The Hockey News has him on a
+   Florida tryout; he signed with Columbus. He fails the roster test regardless.
 
 ## Change log
 
-- Made the roster changed from opening-night active roster to played at
-  least one NHL game for the signing club. Reason: API cannot serve
-  historical opening-night active rosters, and the first-five-games
-  alternative collided with folding in late signers.
-- Late signers moved from undecided to folded into the primary.
+- Made the roster changed from opening-night active roster to appearing in the
+  club's first ten games. Reason: the API cannot serve historical opening-night
+  active rosters.
+- Threshold moved from five games to ten after five excluded three confirmed
+  converts who were healthy scratches in October.
+- Late signers folded into the primary, then reversed. Reason for reversal: the
+  group had no defined end boundary and confirmed same-club conversions in late
+  October and beyond were being missed unsystematically.
+- Same-club rule made explicit after verification surfaced cross-club cases.
 - 2020-21 moved from excluded to included with notes.
-- Scope reduced from ten seasons to six. Reason: data availability at 2018-19.
-- Same-club rule made explicit. A player on a tryout with one club who signs
-  with a different club that season is not a convert. Erik Gustafsson is the
-  worked example: tryout with the Islanders in 2021-22, signed with Chicago
-  October 11, excluded. Decided before the remaining seasons were verified.
-- sign_team corrected for two 2024-25 rows. Derived from signing GM, which
-  broke when Stan Bowman moved from Chicago to Edmonton in July 2024.
-- Taxi squad rule reversed. Originally decided that taxi squad counted toward
-  the roster test; reversed once the run showed it applied a looser standard
-  to 2020-21 than to any other cohort.
-  
+- Taxi squad rule reversed. Originally counted toward the roster test; reversed
+  once the run showed it applied a looser standard to 2020-21 than to any other
+  cohort.
+- Signature window widened from twelve days before the opener to camp opening,
+  after Makiniemi and Claesson were found to be false negatives.
+- Comparator specification corrected from current-season to prior-season games
+  played, as a constraint rather than a tiebreaker.
+- Scope reduced from ten seasons to seven. Reason: data availability at 2018-19.
