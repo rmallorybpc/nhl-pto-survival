@@ -1,4 +1,19 @@
 season,convert,convert_prior_gp,convert_survived,comparator_key,comparator_team,pos,age,age_gap,comparator_prior_gp,gp_gap,one_year_state,survived
+2018-19,Luca Sbisa,30,no,witkowski l,DET,D,28,0,31,1,moved,yes
+2018-19,Luca Sbisa,30,no,kempny m,WSH,D,28,0,31,1,same_team,yes
+2018-19,Luca Sbisa,30,no,bitetto a,NSH,D,28,0,32,2,moved,yes
+2018-19,Luca Sbisa,30,no,fantenberg o,LAK,D,27,1,27,3,out,no
+2018-19,Luca Sbisa,30,no,merrill j,VGK,D,26,2,34,4,same_team,yes
+2018-19,Alex Chiasson,61,yes,kane e,SJS,L,27,0,61,0,same_team,yes
+2018-19,Alex Chiasson,61,yes,tanev b,WPG,L,27,0,61,0,moved,yes
+2018-19,Alex Chiasson,61,yes,sutter b,VAN,C,29,2,61,0,same_team,yes
+2018-19,Alex Chiasson,61,yes,acciari n,BOS,C,27,0,60,1,moved,yes
+2018-19,Alex Chiasson,61,yes,palmieri k,NJD,C,27,0,62,1,same_team,yes
+2018-19,Drew Stafford,59,no,grabner m,ARI,L,31,1,59,0,same_team,yes
+2018-19,Drew Stafford,59,no,gibbons b,ANA,C,30,2,59,0,moved,yes
+2018-19,Drew Stafford,59,no,reaves r,VGK,R,31,1,58,1,same_team,yes
+2018-19,Drew Stafford,59,no,carey p,OTT,C,30,2,60,1,out,no
+2018-19,Drew Stafford,59,no,nash r,CBJ,C,29,3,60,1,same_team,yes
 2019-20,Ben Hutton,69,yes,benning m,EDM,D,25,1,70,1,moved,yes
 2019-20,Ben Hutton,69,yes,pysyk m,FLA,D,27,1,70,1,moved,yes
 2019-20,Ben Hutton,69,yes,zadorov n,COL,D,24,2,70,1,moved,yes

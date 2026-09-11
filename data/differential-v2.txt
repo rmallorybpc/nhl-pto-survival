@@ -1,21 +1,18 @@
 NHL PTO convert survival: one-year differential (v2)
 
 Matched on prior-season NHL games played, not current season.
-  convert prior GP    mean 39.0  median 41.0
-  comparator prior GP mean 39.3  median 44.5
+  convert prior GP    mean 39.8  median 45
+  comparator prior GP mean 40.1  median 45
 
-Converts:    21/43 survived = 48.8%  (95% CI 33.9 to 63.8)
-Comparators: 87/128 survived = 68.0%  (95% CI 59.9 to 76.1)
+Converts:    22/46 survived = 47.8%  (95% CI 33.4 to 62.3)
+Comparators: 96/137 survived = 70.1%  (95% CI 62.4 to 77.7)
 
-Differential: -19.1 points  (95% CI -36.1 to -2.1)
+Differential: -22.2 points  (95% CI -38.6 to -5.9)
 
 Crosses zero: no
 
-Converts matched: 43 of 46
-Converts dropped: 3
-  2018-19 Luca Sbisa: no prior-season pool
-  2018-19 Alex Chiasson: no prior-season pool
-  2018-19 Drew Stafford: no prior-season pool
+Converts matched: 46 of 46
+Converts dropped: 0
 
 Matching: position group exact, age within 2, prior-season
 games played within 15, K=3 per convert.
