@@ -61,7 +61,7 @@ def run():
         crosses = "CROSSES" if r["lo"] <= 0 <= r["hi"] else ""
         lines.append(
             f"{r['k']:<3} {r['age']:<4} {r['gp']:<4} "
-            f"{r['n_c']:>3}/{r['n_c'] + r['dropped']:<5} "
+            f"{r['n_c']:>3}/{r['n_live']:<5} "
             f"{r['pc']:>5.1f}%  {r['pm']:>5.1f}%  "
             f"{r['diff']:>+6.1f}  "
             f"{r['lo']:>+6.1f} to {r['hi']:>+6.1f}  {crosses}"

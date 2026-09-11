@@ -194,8 +194,8 @@ def main(K=K, MAX_AGE_GAP=MAX_AGE_GAP, GP_BAND=GP_BAND, quiet=False):
         w.writerows(matched)
 
     # Only converts that actually found comparators enter the differential.
-    used_converts = {m["convert"] for m in matched}
-    live_m = [r for r in live if r["player"] in used_converts]
+    used_converts = {(m["season"], m["convert"]) for m in matched}
+    live_m = [r for r in live if (r["season"], r["player"]) in used_converts]
 
     n_c = len(live_m)
     s_c = sum(1 for r in live_m if r["survived"] == "yes")
@@ -251,7 +251,7 @@ def main(K=K, MAX_AGE_GAP=MAX_AGE_GAP, GP_BAND=GP_BAND, quiet=False):
     return {"k": K, "age": MAX_AGE_GAP, "gp": GP_BAND,
             "n_c": n_c, "s_c": s_c, "n_m": n_m, "s_m": s_m,
             "pc": pc, "pm": pm, "diff": diff, "lo": lo, "hi": hi,
-            "dropped": len(unmatched)}
+            "dropped": len(unmatched), "n_live": len(live)}
 
 
 if __name__ == "__main__":
