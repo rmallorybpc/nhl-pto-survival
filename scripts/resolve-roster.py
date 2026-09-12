@@ -135,6 +135,7 @@ def stage_two():
     op = load_openers()
     with open(CANDIDATES, newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
+        rows = [r for r in rows if r.get("tracker_confirmed") != "no"]
 
     for r in rows:
         key = (r["season"], r["sign_team"])
