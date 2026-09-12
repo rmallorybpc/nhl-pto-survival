@@ -143,33 +143,33 @@ the variable was games played during the matched season, which is an outcome
 rather than a covariate.
 
 The corrected specification matches on the season before. Convert prior games
-played averages 39.8, comparators 40.1, medians 45 and 45. Both groups are
+played averages 41.0, comparators 41.4, medians 46 and 46. Both groups are
 part-time NHLers from the previous year.
 
 ## Results
 
-One-year survival, 46 converts across seven cohorts:
+One-year survival, 43 converts across seven cohorts:
 
-- Converts: 22/46 = 47.8% (95% CI 33.4 to 62.3)
-- Comparators: 96/137 = 70.1% (95% CI 62.4 to 77.7)
-- Differential: -22.2 points (95% CI -38.6 to -5.9)
+- Converts: 21/43 = 48.8% (95% CI 33.9 to 63.8)
+- Comparators: 88/128 = 68.8% (95% CI 60.7 to 76.8)
+- Differential: -19.9 points (95% CI -36.9 to -3.0)
 
 Sensitivity across nine configurations varying K, age window and games-played
-band: the differential ranges from -20.3 to -23.9 points. Every configuration
+band: the differential ranges from -18.5 to -20.9 points. Every configuration
 clears zero. The tightest configuration, age within 1 and games played within
-10, gives the weakest result at -20.3 with an upper bound of -3.6.
+10, gives the weakest result at -18.5 with an upper bound of -1.1.
 
 Fit durability, reported separately per the brief:
 
-- Same team at one year: 7 of 46 (15.2%)
-- Moved: 15 of 46
-- Out: 24 of 46
+- Same team at one year: 6 of 43 (14.0%)
+- Moved: 15 of 43
+- Out: 22 of 43
 
 Among survivors, better than two in three have changed clubs. A traded player
 still playing is not a failure, which is why this is reported apart from the
 survival result.
 
-Cohort-level survival is not a finding. Cohorts run from 2 to 12 players and
+Cohort-level survival is not a finding. Cohorts run from 2 to 10 players and
 the spread is noise. 2020-21 in particular resolves against 2021-22, a return
 to normal schedules and roster sizes, which would inflate survival for reasons
 unrelated to tryouts.
@@ -207,7 +207,9 @@ zero, but the decision was made in advance either way.
 ## Outstanding work
 
 1. Count the back-on-a-PTO cell. The brief says to count it before writing any
-   framing. Needs tryout sources for the following season across seven cohorts.
+   framing. Scoped to the 22 converts who did not survive, since recirculation
+   only matters for players who fell out. Needs tryout sources for the
+   following season across seven cohorts.
 2. Resolve Yannick Weber, 2020-21: tryout with Nashville, signing GM field
    points to Pittsburgh. Same pattern as Gustafsson if confirmed.
 3. Confirm the Letestu 2018-19 tryout club. The Hockey News has him on a
@@ -233,3 +235,20 @@ zero, but the decision was made in advance either way.
 - Comparator specification corrected from current-season to prior-season games
   played, as a constraint rather than a tiebreaker.
 - Scope reduced from ten seasons to seven. Reason: data availability at 2018-19.
+- Verification results backfilled into data/candidates.csv and the analysis
+  chain rerun. An earlier run counted three confirmed non-tryouts as converts
+  (Ritchie and Soshnikov in 2022-23, Lankinen in 2024-25) because verification
+  findings were never written back to the data file. resolve-roster.py now
+  filters tracker_confirmed == "no" at the front of the chain. Converts fell
+  from 46 to 43; the differential moved from -22.2 to -19.9 points and stayed
+  clear of zero in every configuration.
+
+## Verification status
+
+54 rows confirmed as tryouts with the signing club. 7 confirmed NOT tryouts
+and filtered out. 3 unresolved.
+
+The three unresolved are Ben Hutton (2019-20), Max McCormick (2021-22) and
+Pierre-Cedric Labrie (2022-23). Labrie fails the roster test regardless, so
+two carry into the analysis. Both are retained and both belong in a
+sensitivity note rather than being dropped silently.
