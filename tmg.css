@@ -116,6 +116,7 @@ a:hover { color: var(--tmg-charcoal); }
 }
 
 .tmg-dropdown-wrap { position: relative; justify-self: end; }
+.tmg-nav > .tmg-dropdown-wrap:last-child { grid-column: 3; }
 
 .tmg-dropdown-btn {
   background: transparent; border: 1px solid rgba(45,52,54,0.20);
