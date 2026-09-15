@@ -6,7 +6,35 @@
 <title>Audit | NHL PTO Convert Survival</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tmg.css">
+<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
+<style>
+    .tmg-nav-left { display:flex; align-items:center; gap:20px; }
+    .tmg-navlinks { display:flex; gap:4px; }
+    .tmg-navlink { font-size:13px; font-weight:500; color:rgba(45,52,54,0.60);
+      text-decoration:none; padding:6px 10px; border-radius:6px; transition:all .12s; }
+    .tmg-navlink:hover { background:rgba(132,169,140,0.10); color:var(--tmg-charcoal); }
+    .tmg-navlink.active { color:var(--tmg-charcoal); background:rgba(132,169,140,0.15); }
+    .tmg-dd-group { font-size:11px; font-weight:500; letter-spacing:.07em;
+      text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
+    .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
+    .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
+    .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
+    .prose li { margin-bottom:6px; }
+    .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
+    .stat-row { display:flex; gap:var(--tmg-gap); flex-wrap:wrap; margin:18px 0 6px; }
+    .stat { flex:1; min-width:150px; }
+    .big { font-size:40px; font-weight:500; line-height:1.1; margin:0 0 4px; }
+    .neg { color:var(--tmg-error); } .pos { color:var(--tmg-success); }
+    .tag { display:inline-block; font-size:11px; font-weight:500; padding:2px 8px;
+      border-radius:4px; letter-spacing:.04em; }
+    .t-wrong { background:rgba(176,0,32,.12); color:var(--tmg-error); }
+    .t-soft { background:rgba(196,127,0,.14); color:var(--tmg-warning); }
+    .t-unver { background:rgba(45,52,54,.10); color:rgba(45,52,54,.65); }
+    .t-ver { background:rgba(46,133,64,.12); color:var(--tmg-success); }
+    .note { border-left:3px solid var(--tmg-sage); padding:2px 0 2px 14px;
+      margin:16px 0; color:rgba(45,52,54,.72); font-size:15px; }
+    .scroll { overflow-x:auto; }
+</style>
 </head>
 <body>
 <nav class="tmg-nav" role="banner">
@@ -14,8 +42,6 @@
     <div class="tmg-logo" aria-label="The Mallory Group">
       <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
     </div>
-  </div>
-  <div class="tmg-nav-center">
     <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink">Findings</a><a href="methods.html" class="tmg-navlink">Methods</a><a href="audit.html" class="tmg-navlink active" aria-current="page">Audit</a></div>
   </div>
   <div class="tmg-dropdown-wrap">
@@ -61,7 +87,7 @@
 <div class="tmg-page tmg-container">
   <div class="tmg-page-header">
     <p class="tmg-eyebrow">Audit &middot; Hostile review of this study</p>
-    <h1 class="tmg-page-title">Fourteen claims audited, none found wrong, four found soft</h1>
+    <h1 class="tmg-page-title">Fourteen claims audited, none found wrong, six found soft</h1>
     <p class="tmg-page-desc">Conducted under a standard where unverifiable claims are downgraded rather than given benefit of the doubt.</p>
   </div>
 
@@ -201,10 +227,13 @@
       <h2 class="tmg-h2">What to do about each finding</h2>
       <h3>Correct now</h3>
       <ul>
-        <li>Add a sensitivity result excluding Ben Hutton and Max McCormick, whose tryout
-        status is unresolved. Two of 43 could move the point estimate by more than a point.</li>
-        <li>State the 43 as a lower bound wherever the population is described, including on
-        the findings page.</li>
+        <li><strong>Applied.</strong> The 43 is now described as a lower bound wherever the
+        population appears, and the findings page no longer claims every convert was verified.
+        Two of the 43 have unresolved tryout status and the pages now say so.</li>
+        <li><strong>Outstanding.</strong> A sensitivity result excluding Ben Hutton and Max
+        McCormick has not been run. Two of 43 could move the point estimate by more than a
+        point. This is the largest known gap between what this audit recommends and what the
+        site currently shows.</li>
       </ul>
       <h3>Verify before wider circulation</h3>
       <ul>
@@ -236,9 +265,17 @@
       <p>The underlying work is sound. The headline is reproducible from published scripts,
       the comparator is specified correctly after an earlier version was found wrong and
       replaced, and the sensitivity range is genuinely stable.</p>
-      <p>The corrections required are two: publish a sensitivity result excluding the two
-      unresolved players, and describe the population as a lower bound rather than a count.
-      Both are small and neither threatens the finding.</p>
+      <p>Two corrections were required. The population is now described as a lower bound
+      rather than a count, which is applied. A sensitivity result excluding the two unresolved
+      players has not yet been run, and that remains outstanding. Neither threatens the
+      finding.</p>
+      <p>A second audit pass was run against these pages after publication. It found six wrong
+      claims, all of them wording or arithmetic errors in the pages rather than errors in the
+      study: a population described as fully verified when two cases are not, a candidate count
+      that did not add up, a miscount of this page\u2019s own findings, and an overstated claim
+      about how many seasons showed the signing trough. All six are corrected. The pattern is
+      worth naming: every one was an internal inconsistency that required no external checking
+      to find, and every overstatement ran in the same direction.</p>
       <p>The honest limit is this. The study demonstrates that its 43 identified converts
       survived at a lower rate than matched comparators. Whether those 43 are the right 43
       rests on tryout lists that no longer have a complete source behind them. That is stated

@@ -6,7 +6,35 @@
 <title>NHL PTO Convert Survival | The Mallory Group</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tmg.css">
+<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
+<style>
+    .tmg-nav-left { display:flex; align-items:center; gap:20px; }
+    .tmg-navlinks { display:flex; gap:4px; }
+    .tmg-navlink { font-size:13px; font-weight:500; color:rgba(45,52,54,0.60);
+      text-decoration:none; padding:6px 10px; border-radius:6px; transition:all .12s; }
+    .tmg-navlink:hover { background:rgba(132,169,140,0.10); color:var(--tmg-charcoal); }
+    .tmg-navlink.active { color:var(--tmg-charcoal); background:rgba(132,169,140,0.15); }
+    .tmg-dd-group { font-size:11px; font-weight:500; letter-spacing:.07em;
+      text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
+    .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
+    .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
+    .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
+    .prose li { margin-bottom:6px; }
+    .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
+    .stat-row { display:flex; gap:var(--tmg-gap); flex-wrap:wrap; margin:18px 0 6px; }
+    .stat { flex:1; min-width:150px; }
+    .big { font-size:40px; font-weight:500; line-height:1.1; margin:0 0 4px; }
+    .neg { color:var(--tmg-error); } .pos { color:var(--tmg-success); }
+    .tag { display:inline-block; font-size:11px; font-weight:500; padding:2px 8px;
+      border-radius:4px; letter-spacing:.04em; }
+    .t-wrong { background:rgba(176,0,32,.12); color:var(--tmg-error); }
+    .t-soft { background:rgba(196,127,0,.14); color:var(--tmg-warning); }
+    .t-unver { background:rgba(45,52,54,.10); color:rgba(45,52,54,.65); }
+    .t-ver { background:rgba(46,133,64,.12); color:var(--tmg-success); }
+    .note { border-left:3px solid var(--tmg-sage); padding:2px 0 2px 14px;
+      margin:16px 0; color:rgba(45,52,54,.72); font-size:15px; }
+    .scroll { overflow-x:auto; }
+</style>
 </head>
 <body>
 <nav class="tmg-nav" role="banner">
@@ -14,8 +42,6 @@
     <div class="tmg-logo" aria-label="The Mallory Group">
       <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
     </div>
-  </div>
-  <div class="tmg-nav-center">
     <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink active" aria-current="page">Findings</a><a href="methods.html" class="tmg-navlink">Methods</a><a href="audit.html" class="tmg-navlink">Audit</a></div>
   </div>
   <div class="tmg-dropdown-wrap">
@@ -62,7 +88,7 @@
   <div class="tmg-page-header">
     <p class="tmg-eyebrow">Sports analytics &middot; Seven seasons</p>
     <h1 class="tmg-page-title">Players who make the team on a tryout wash out faster</h1>
-    <p class="tmg-page-desc">43 verified camp converts, 2018-19 through 2024-25, against matched players who made the same rosters without a tryout.</p>
+    <p class="tmg-page-desc">43 camp converts, 41 of them verified against published tryout sources, 2018-19 through 2024-25, against matched players who made the same rosters without a tryout.</p>
   </div>
 
   <div class="tmg-bento-grid">
@@ -86,6 +112,8 @@
       <p class="big neg">&minus;19.9</p>
       <p class="tmg-card-sub">percentage points</p>
       <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">95% CI &minus;36.9 to &minus;3.0 &middot; stable across nine specifications</p>
+      <p class="tmg-body-sm tmg-text-muted" style="margin-top:8px">Those specifications vary how
+      comparators are matched. None varies who counts as a convert, which is the larger risk.</p>
     </div>
 
     <div class="tmg-card-wide prose">
@@ -125,8 +153,9 @@
       <p class="tmg-card-label">Scope</p>
       <p class="big">7</p>
       <p class="tmg-card-sub">seasons, 2018-19 through 2024-25</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">Every convert verified against
-      published tryout sources, not inferred from contract data alone.</p>
+      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">Converts verified against published
+      tryout sources rather than inferred from contract data. Two of the 43 remain unresolved.
+      Treat 43 as a lower bound.</p>
     </div>
 
     <div class="tmg-card-wide prose">
@@ -179,11 +208,11 @@
     <div class="tmg-card-wide prose">
       <p class="tmg-card-label">Data</p>
       <h2 class="tmg-h2">The dataset is published alongside the finding</h2>
-      <p>CapFriendly held the only complete public record of NHL tryouts and went offline in
+      <p>CapFriendly held the most complete public record of NHL tryouts and went offline in
       July 2024. Nothing replaced it retroactively. Rebuilding this required assembling
       candidates from contract timing and then verifying every one against published tryout
       coverage, season by season.</p>
-      <p>What came out of that is a set of 43 verified camp converts across seven seasons,
+      <p>What came out of that is a set of 43 camp converts across seven seasons, 41 of them verified,
       each row carrying its tryout source, signing date, club, roster outcome and one-year
       outcome. As far as I can tell nothing equivalent exists publicly.</p>
       <p>The dataset, the scripts that built it, and the full decision log are in the
