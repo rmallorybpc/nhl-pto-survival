@@ -18,7 +18,12 @@
   --tmg-charcoal:     #2D3436;
   --tmg-sage:         #84A98C;
   --tmg-sage-hover:   #6B8F74;
+  --tmg-charcoal-hover: #3D4446;
   --tmg-white:        #FFFFFF;
+  --tmg-muted:        rgba(45, 52, 54, 0.55);
+  --tmg-muted-strong: rgba(45, 52, 54, 0.60);
+  --tmg-hint:         rgba(45, 52, 54, 0.35);
+  --tmg-ghost-border: rgba(45, 52, 54, 0.20);
 
   /* Semantic */
   --tmg-bg:           var(--tmg-cream);
@@ -86,6 +91,9 @@ body {
 .tmg-metric     { font-size: 28px;  font-weight: 500; color: var(--tmg-charcoal); }
 .tmg-text-muted { color: rgba(45, 52, 54, 0.55); }
 .tmg-text-accent{ color: var(--tmg-sage); }
+
+a { color: var(--tmg-sage-hover); }
+a:hover { color: var(--tmg-charcoal); }
 
 
 /* ── 4. Navigation ─────────────────────────────────────────── */
@@ -201,7 +209,7 @@ body {
   cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
   font-family: inherit; transition: background 0.15s;
 }
-.tmg-btn:hover          { background: #3D4446; }
+.tmg-btn:hover          { background: var(--tmg-charcoal-hover); }
 .tmg-btn:active         { transform: scale(0.98); }
 .tmg-btn:focus-visible  { outline: 3px solid rgba(45,52,54,0.20); outline-offset: 2px; }
 
@@ -217,7 +225,47 @@ body {
 .tmg-btn-ghost:focus-visible { outline: 3px solid rgba(132,169,140,0.35); outline-offset: 2px; }
 
 
-/* ── 8. Tables ─────────────────────────────────────────────── */
+/* ── 8. Study page extensions ─────────────────────────────── */
+.tmg-nav-left { display: flex; align-items: center; gap: 20px; min-width: 0; }
+.tmg-navlinks { display: flex; gap: 4px; }
+.tmg-navlink {
+  color: var(--tmg-muted-strong); text-decoration: none; padding: 6px 10px;
+  border-radius: 6px; font-size: 13px; font-weight: 500;
+  transition: background 0.12s, color 0.12s;
+}
+.tmg-navlink:hover { background: rgba(132, 169, 140, 0.10); color: var(--tmg-charcoal); }
+.tmg-navlink.active { background: rgba(132, 169, 140, 0.15); color: var(--tmg-charcoal); }
+
+.tmg-dd-group {
+  color: rgba(45, 52, 54, 0.42); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.07em; margin: 10px 12px 4px; text-transform: uppercase;
+}
+.tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top: 4px; }
+.tmg-dropdown-menu { min-width: 270px; max-height: 70vh; overflow-y: auto; }
+
+.prose p { margin: 0 0 14px; }
+.prose ul { margin: 0 0 14px; padding-left: 20px; }
+.prose li { margin-bottom: 6px; }
+.prose h3 { font-size: 16px; font-weight: 500; margin: 22px 0 8px; }
+.prose a { font-weight: 500; }
+.stat-row { display: flex; gap: var(--tmg-gap); flex-wrap: wrap; margin: 18px 0 6px; }
+.stat { flex: 1; min-width: 150px; }
+.big { font-size: 40px; font-weight: 500; line-height: 1.1; margin: 0 0 4px; }
+.neg { color: var(--tmg-error); }
+.pos { color: var(--tmg-success); }
+.tag { border-radius: 4px; display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 2px 8px; }
+.t-wrong { background: rgba(176, 0, 32, 0.12); color: var(--tmg-error); }
+.t-soft { background: rgba(196, 127, 0, 0.14); color: var(--tmg-warning); }
+.t-unver { background: rgba(45, 52, 54, 0.10); color: rgba(45, 52, 54, 0.65); }
+.t-ver { background: rgba(46, 133, 64, 0.12); color: var(--tmg-success); }
+.note { border-left: 3px solid var(--tmg-sage); color: rgba(45, 52, 54, 0.72); font-size: 15px; margin: 16px 0; padding: 2px 0 2px 14px; }
+.scroll { overflow-x: auto; }
+
+.tmg-card { transition: border-color 0.15s, box-shadow 0.15s; }
+.tmg-card:hover, .tmg-card-wide:hover { border-color: rgba(132, 169, 140, 0.50); box-shadow: var(--tmg-shadow-sm); }
+
+
+/* ── 9. Tables ─────────────────────────────────────────────── */
 .tmg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
 
 .tmg-table th {
@@ -237,7 +285,7 @@ body {
 .tmg-table tr:hover td      { background: rgba(132,169,140,0.04); }
 
 
-/* ── 9. Form inputs ────────────────────────────────────────── */
+/* ── 10. Form inputs ───────────────────────────────────────── */
 .tmg-input,
 .tmg-select,
 .tmg-textarea {
@@ -257,4 +305,17 @@ body {
 .tmg-field-label {
   display: block; font-size: 13px; font-weight: 500;
   color: var(--tmg-charcoal); margin-bottom: 6px;
+}
+
+@media (max-width: 720px) {
+  .tmg-nav { height: auto; min-height: 56px; padding: 10px 16px; gap: 10px; }
+  .tmg-nav-left { align-items: flex-start; flex: 1; flex-direction: column; gap: 6px; }
+  .tmg-navlinks { flex-wrap: wrap; margin-left: -10px; }
+  .tmg-dropdown-btn { padding: 7px 10px; }
+  .tmg-dropdown-btn { font-size: 12px; }
+  .tmg-page { padding: 20px 16px; }
+  .tmg-page-title { font-size: 25px; }
+  .tmg-card, .tmg-card-wide { padding: 18px; }
+  .big { font-size: 36px; }
+  .tmg-footer { padding: 18px 16px; }
 }
