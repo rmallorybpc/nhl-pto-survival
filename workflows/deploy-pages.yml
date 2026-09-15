@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+# Deploys the site on every push to main. The repo is served as-is:
+# index.html, methods.html and audit.html sit in the root, so no build
+# step is needed. data/ and scripts/ are published too, which is
+# intentional - the dataset and the scripts are part of the deliverable.
+
+on:
+  push:
+    branches: [main]
+  # Lets you trigger a deploy by hand from the Actions tab without pushing.
+  workflow_dispatch:
+
+# Permissions the deploy needs. Read the repo, write to Pages, and
+# request the OIDC token Pages uses to verify the deployment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# If two pushes land close together, let the running deploy finish
+# rather than cancelling it midway.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # The whole repo root. Change this to a subfolder if the site
+          # ever moves out of the root.
+          path: '.'
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
