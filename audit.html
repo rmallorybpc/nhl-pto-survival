@@ -6,7 +6,7 @@
 <title>Audit | NHL PTO Convert Survival</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
+<link rel="stylesheet" href="tmg.css">
 <style>
     .tmg-nav-left { display:flex; align-items:center; gap:20px; }
     .tmg-navlinks { display:flex; gap:4px; }
@@ -288,22 +288,31 @@
 </div>
 <footer class="tmg-footer">The Mallory Group &middot; NHL PTO convert survival study &middot; Data through the 2024-25 season</footer>
 <script>
-(function(){
-  var b=document.getElementById('tmgDdBtn'), m=document.getElementById('tmgDdMenu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(e){
+(function () {
+  const btn  = document.getElementById('tmgDdBtn');
+  const menu = document.getElementById('tmgDdMenu');
+  if (!btn || !menu) return;
+
+  btn.addEventListener('click', function (e) {
     e.stopPropagation();
-    var open=m.classList.toggle('open');
-    b.classList.toggle('open',open);
-    b.setAttribute('aria-expanded',open?'true':'false');
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
   });
-  document.addEventListener('click',function(){
-    m.classList.remove('open'); b.classList.remove('open');
-    b.setAttribute('aria-expanded','false');
+
+  document.addEventListener('click', function () {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
   });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){ m.classList.remove('open'); b.classList.remove('open');
-      b.setAttribute('aria-expanded','false'); b.focus(); }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
   });
 })();
 </script>
