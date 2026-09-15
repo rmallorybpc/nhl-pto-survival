@@ -1,251 +1,441 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NHL PTO Convert Survival | The Mallory Group</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
-<style>
-    .tmg-nav-left { display:flex; align-items:center; gap:20px; }
-    .tmg-navlinks { display:flex; gap:4px; }
-    .tmg-navlink { font-size:13px; font-weight:500; color:rgba(45,52,54,0.60);
-      text-decoration:none; padding:6px 10px; border-radius:6px; transition:all .12s; }
-    .tmg-navlink:hover { background:rgba(132,169,140,0.10); color:var(--tmg-charcoal); }
-    .tmg-navlink.active { color:var(--tmg-charcoal); background:rgba(132,169,140,0.15); }
-    .tmg-dd-group { font-size:11px; font-weight:500; letter-spacing:.07em;
-      text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
-    .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
-    .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
-    .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
-    .prose li { margin-bottom:6px; }
-    .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
-    .stat-row { display:flex; gap:var(--tmg-gap); flex-wrap:wrap; margin:18px 0 6px; }
-    .stat { flex:1; min-width:150px; }
-    .big { font-size:40px; font-weight:500; line-height:1.1; margin:0 0 4px; }
-    .neg { color:var(--tmg-error); } .pos { color:var(--tmg-success); }
-    .tag { display:inline-block; font-size:11px; font-weight:500; padding:2px 8px;
-      border-radius:4px; letter-spacing:.04em; }
-    .t-wrong { background:rgba(176,0,32,.12); color:var(--tmg-error); }
-    .t-soft { background:rgba(196,127,0,.14); color:var(--tmg-warning); }
-    .t-unver { background:rgba(45,52,54,.10); color:rgba(45,52,54,.65); }
-    .t-ver { background:rgba(46,133,64,.12); color:var(--tmg-success); }
-    .note { border-left:3px solid var(--tmg-sage); padding:2px 0 2px 14px;
-      margin:16px 0; color:rgba(45,52,54,.72); font-size:15px; }
-    .scroll { overflow-x:auto; }
-</style>
-</head>
-<body>
-<nav class="tmg-nav" role="banner">
-  <div class="tmg-nav-left">
-    <div class="tmg-logo" aria-label="The Mallory Group">
-      <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
-    </div>
-    <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink active" aria-current="page">Findings</a><a href="methods.html" class="tmg-navlink">Methods</a><a href="audit.html" class="tmg-navlink">Audit</a></div>
-  </div>
-  <div class="tmg-dropdown-wrap">
-    <button class="tmg-dropdown-btn" id="tmgDdBtn" aria-haspopup="true"
-            aria-expanded="false" aria-controls="tmgDdMenu">
-      TMG Tool Suite
-      <svg class="tmg-chevron" viewBox="0 0 12 12" fill="none" width="12" height="12" aria-hidden="true">
-        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div class="tmg-dropdown-menu" id="tmgDdMenu" role="menu">
-      <div role="group" aria-label="Research and Systems">
-        <p class="tmg-dd-group">Research and Systems</p>
-        <a href="https://rmallorybpc.github.io/federal-ai-spend-audit/" target="_blank" rel="noreferrer" role="menuitem">Federal AI Spend Audit</a>
-        <a href="https://rmallorybpc.github.io/pdf-multi-agent-analysis/" target="_blank" rel="noreferrer" role="menuitem">PDF Multi-Agent Analysis</a>
-        <a href="https://content-integrity-audit.pages.dev/" target="_blank" rel="noreferrer" role="menuitem">Content Integrity</a>
-        <a href="https://rmallorybpc.github.io/colorado-snowpack-enso/" target="_blank" rel="noreferrer" role="menuitem">Colorado ENSO Explorer</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NHL PTO Convert Survival | The Mallory Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tmg.css" />
+  </head>
+  <body>
+    <nav class="tmg-nav" role="banner">
+      <div class="tmg-nav-left">
+        <div class="tmg-logo" aria-label="The Mallory Group">
+          <span>TM</span>
+          <div class="tmg-logo-divider" aria-hidden="true"></div>
+          <span>G</span>
+        </div>
       </div>
-      <div role="group" aria-label="Talent Research">
-        <p class="tmg-dd-group">Talent Research</p>
-        <a href="https://rmallorybpc.github.io/talent-portability-research/" target="_blank" rel="noreferrer" role="menuitem">Talent Portability Research</a>
-        <a href="https://rmallorybpc.github.io/external-hire-premium/" target="_blank" rel="noreferrer" role="menuitem">External Hire Premium</a>
-        <a href="https://rmallorybpc.github.io/nfl-coach-continuity/" target="_blank" rel="noreferrer" role="menuitem">NFL Coach Continuity</a>
-        <a href="https://rmallorybpc.github.io/nhl-reunion/" target="_blank" rel="noreferrer" role="menuitem">NHL Reunion</a>
-        <a href="https://rmallorybpc.github.io/nhl-play-for-contract/" target="_blank" rel="noreferrer" role="menuitem">NHL Play for Contract</a>
-        <a href="https://rmallorybpc.github.io/nhl-free-agency-research/welcome.html" target="_blank" rel="noreferrer" role="menuitem">NHL Free Agency Research</a>
-        <a href="https://rmallorybpc.github.io/nba-research-project/" target="_blank" rel="noreferrer" role="menuitem">NBA Supermax Research</a>
+      <div class="tmg-nav-center">
+        <div class="tmg-navlinks">
+          <a href="index.html" class="tmg-navlink active" aria-current="page"
+            >Findings</a
+          ><a href="methods.html" class="tmg-navlink">Methods</a
+          ><a href="audit.html" class="tmg-navlink">Audit</a>
+        </div>
       </div>
-      <div role="group" aria-label="Sports Tools">
-        <p class="tmg-dd-group">Sports Tools</p>
-        <a href="https://rmallorybpc.github.io/nflanalysis/dashboard/src/findings.html?season=2022&amp;team_id=PHI" target="_blank" rel="noreferrer" role="menuitem">NFL Team Findings Dashboard</a>
-        <a href="https://rmallorybpc.github.io/nfl-environment-reprojection/" target="_blank" rel="noreferrer" role="menuitem">NFL Environment Reprojection</a>
+      <div class="tmg-dropdown-wrap">
+        <button
+          class="tmg-dropdown-btn"
+          id="tmgDdBtn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="tmgDdMenu"
+        >
+          TMG Tool Suite
+          <svg
+            class="tmg-chevron"
+            viewBox="0 0 12 12"
+            fill="none"
+            width="12"
+            height="12"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 4l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <div class="tmg-dropdown-menu" id="tmgDdMenu" role="menu">
+          <div role="group" aria-label="Research and Systems">
+            <p class="tmg-dd-group">Research and Systems</p>
+            <a
+              href="https://rmallorybpc.github.io/federal-ai-spend-audit/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Federal AI Spend Audit</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/pdf-multi-agent-analysis/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >PDF Multi-Agent Analysis</a
+            >
+            <a
+              href="https://content-integrity-audit.pages.dev/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Content Integrity</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/colorado-snowpack-enso/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Colorado ENSO Explorer</a
+            >
+          </div>
+          <div role="group" aria-label="Talent Research">
+            <p class="tmg-dd-group">Talent Research</p>
+            <a
+              href="https://rmallorybpc.github.io/talent-portability-research/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Talent Portability Research</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/external-hire-premium/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >External Hire Premium</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nfl-coach-continuity/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Coach Continuity</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-reunion/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Reunion</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-play-for-contract/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Play for Contract</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-free-agency-research/welcome.html"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Free Agency Research</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nba-research-project/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NBA Supermax Research</a
+            >
+          </div>
+          <div role="group" aria-label="Sports Tools">
+            <p class="tmg-dd-group">Sports Tools</p>
+            <a
+              href="https://rmallorybpc.github.io/nflanalysis/dashboard/src/findings.html?season=2022&amp;team_id=PHI"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Team Findings Dashboard</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nfl-environment-reprojection/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Environment Reprojection</a
+            >
+          </div>
+          <div role="group" aria-label="Personal">
+            <p class="tmg-dd-group">Personal</p>
+            <a
+              href="https://rmallorybpc.github.io/recipes/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Family Recipes and Grocery List</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/housing-market-intel/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Housing Market Intel</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/real-estate-report/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Real Estate Report</a
+            >
+          </div>
+        </div>
       </div>
-      <div role="group" aria-label="Personal">
-        <p class="tmg-dd-group">Personal</p>
-        <a href="https://rmallorybpc.github.io/recipes/" target="_blank" rel="noreferrer" role="menuitem">Family Recipes and Grocery List</a>
-        <a href="https://rmallorybpc.github.io/housing-market-intel/" target="_blank" rel="noreferrer" role="menuitem">Housing Market Intel</a>
-        <a href="https://rmallorybpc.github.io/real-estate-report/" target="_blank" rel="noreferrer" role="menuitem">Real Estate Report</a>
+    </nav>
+    <div class="tmg-page tmg-container">
+      <div class="tmg-page-header">
+        <p class="tmg-eyebrow">Sports analytics &middot; Seven seasons</p>
+        <h1 class="tmg-page-title">
+          Players who make the team on a tryout wash out faster
+        </h1>
+        <p class="tmg-page-desc">
+          43 verified camp converts, 2018-19 through 2024-25, against matched
+          players who made the same rosters without a tryout.
+        </p>
+      </div>
+
+      <div class="tmg-bento-grid">
+        <div class="tmg-card">
+          <p class="tmg-card-label">Converts</p>
+          <p class="big">48.8%</p>
+          <p class="tmg-card-sub">still in the NHL one year later</p>
+          <p class="tmg-body-sm tmg-text-muted" style="margin-top: 10px">
+            21 of 43 &middot; 95% CI 33.9 to 63.8
+          </p>
+        </div>
+
+        <div class="tmg-card">
+          <p class="tmg-card-label">Matched comparators</p>
+          <p class="big">68.8%</p>
+          <p class="tmg-card-sub">still in the NHL one year later</p>
+          <p class="tmg-body-sm tmg-text-muted" style="margin-top: 10px">
+            88 of 128 &middot; 95% CI 60.7 to 76.8
+          </p>
+        </div>
+
+        <div class="tmg-card">
+          <p class="tmg-card-label">Differential</p>
+          <p class="big neg">&minus;19.9</p>
+          <p class="tmg-card-sub">percentage points</p>
+          <p class="tmg-body-sm tmg-text-muted" style="margin-top: 10px">
+            95% CI &minus;36.9 to &minus;3.0 &middot; stable across nine
+            specifications
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">The finding</p>
+          <h2 class="tmg-h2">
+            Making the team on a tryout is not the comeback it looks like
+          </h2>
+          <p>
+            Every September a handful of veterans show up to an NHL camp with no
+            contract. They are on a professional tryout: permission to practise
+            and play preseason games, nothing more. A few earn a deal and make
+            the roster. Those are the feel-good stories of the preseason.
+          </p>
+          <p>
+            This study followed 43 of them across seven seasons and asked a
+            simple question. A year later, are they still in the league?
+          </p>
+          <p>
+            Just under half were. Comparable players who made the same rosters
+            without a tryout survived at roughly seven in ten. The gap is about
+            20 points.
+          </p>
+          <p>
+            That comparison is the whole point. A survival rate on its own says
+            nothing, because these are marginal players and marginal players
+            wash out. The question is whether they wash out faster than similar
+            players who did not need a tryout to get there. They do.
+          </p>
+        </div>
+
+        <div class="tmg-card">
+          <p class="tmg-card-label">Fit durability</p>
+          <p class="big">
+            6<span class="tmg-text-muted" style="font-size: 22px"> of 43</span>
+          </p>
+          <p class="tmg-card-sub">still with the club that signed them</p>
+          <p class="tmg-body-sm tmg-text-muted" style="margin-top: 10px">
+            Fourteen percent. Among the 21 who survived, better than two in
+            three had changed clubs.
+          </p>
+        </div>
+
+        <div class="tmg-card">
+          <p class="tmg-card-label">Back on a tryout</p>
+          <p class="big">
+            4<span class="tmg-text-muted" style="font-size: 22px"> of 22</span>
+          </p>
+          <p class="tmg-card-sub">
+            non-survivors on another tryout the next year
+          </p>
+          <p class="tmg-body-sm tmg-text-muted" style="margin-top: 10px">
+            Treat as a floor. Several annual tryout lists cover notable players
+            only.
+          </p>
+        </div>
+
+        <div class="tmg-card">
+          <p class="tmg-card-label">Scope</p>
+          <p class="big">7</p>
+          <p class="tmg-card-sub">seasons, 2018-19 through 2024-25</p>
+          <p class="tmg-body-sm tmg-text-muted" style="margin-top: 10px">
+            Every convert verified against published tryout sources, not
+            inferred from contract data alone.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">What counts as a convert</p>
+          <h2 class="tmg-h2">Three conditions, all of them strict</h2>
+          <ul>
+            <li>On a professional tryout in an NHL training camp.</li>
+            <li>
+              Signed a standard contract with <em>that same club</em> on or
+              before its opening night.
+            </li>
+            <li>Played in at least one of that club's first ten games.</li>
+          </ul>
+          <p>
+            The third condition matters more than it sounds. Signing a contract
+            and making the team are different outcomes. Three verified tryout
+            converts in this set signed a deal and never appeared for the club
+            at all.
+          </p>
+          <p>
+            Players who signed after opening night are excluded, as are players
+            who tried out with one club and signed with another. Both are real
+            and both are a different story from the one this study is about.
+          </p>
+          <p class="note">
+            The full definitions, the identification method, and everything that
+            went wrong along the way are on the
+            <a href="methods.html">methods page</a>. The study was also put
+            through a hostile review; that is on the
+            <a href="audit.html">audit page</a>.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">The recirculators</p>
+          <h2 class="tmg-h2">
+            Four players went back to a tryout the following year
+          </h2>
+          <div class="scroll">
+            <table class="tmg-table">
+              <thead>
+                <tr>
+                  <th scope="col">Player</th>
+                  <th scope="col">Converted</th>
+                  <th scope="col">Back on a tryout</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Alex Chiasson</td>
+                  <td>2021-22, Vancouver</td>
+                  <td>2022-23, Arizona</td>
+                </tr>
+                <tr>
+                  <td>James Neal</td>
+                  <td>2021-22, St. Louis</td>
+                  <td>2022-23, Columbus</td>
+                </tr>
+                <tr>
+                  <td>Zach Aston-Reese</td>
+                  <td>2022-23, Toronto</td>
+                  <td>2023-24, Carolina</td>
+                </tr>
+                <tr>
+                  <td>Kevin Labanc</td>
+                  <td>2024-25, Columbus</td>
+                  <td>2025-26, Carolina (released)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top: 14px">
+            This was counted before any framing was written, which is why it is
+            four names and not a headline. An early read of the data suggested
+            recirculation might be the bigger story. Counting it properly showed
+            otherwise.
+          </p>
+          <p>
+            The definition is also narrower than the phenomenon. Scott
+            Harrington converted with San Jose in 2022-23, did not survive, and
+            turned up on a tryout in 2024-25 &mdash; two years later, so outside
+            the count by construction.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">Data</p>
+          <h2 class="tmg-h2">The dataset is published alongside the finding</h2>
+          <p>
+            CapFriendly held the only complete public record of NHL tryouts and
+            went offline in July 2024. Nothing replaced it retroactively.
+            Rebuilding this required assembling candidates from contract timing
+            and then verifying every one against published tryout coverage,
+            season by season.
+          </p>
+          <p>
+            What came out of that is a set of 43 verified camp converts across
+            seven seasons, each row carrying its tryout source, signing date,
+            club, roster outcome and one-year outcome. As far as I can tell
+            nothing equivalent exists publicly.
+          </p>
+          <p>
+            The dataset, the scripts that built it, and the full decision log
+            are in the repository.
+          </p>
+          <p style="margin-top: 18px">
+            <a
+              class="tmg-btn"
+              href="https://github.com/rmallorybpc/nhl-pto-survival"
+              target="_blank"
+              rel="noreferrer"
+              >View the repository</a
+            >
+            <a
+              class="tmg-btn-ghost"
+              href="methods.html"
+              style="margin-left: 8px"
+              >Read the methods</a
+            >
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
-<div class="tmg-page tmg-container">
-  <div class="tmg-page-header">
-    <p class="tmg-eyebrow">Sports analytics &middot; Seven seasons</p>
-    <h1 class="tmg-page-title">Players who make the team on a tryout wash out faster</h1>
-    <p class="tmg-page-desc">43 camp converts, 41 of them verified against published tryout sources, 2018-19 through 2024-25, against matched players who made the same rosters without a tryout.</p>
-  </div>
-
-  <div class="tmg-bento-grid">
-
-    <div class="tmg-card">
-      <p class="tmg-card-label">Converts</p>
-      <p class="big">48.8%</p>
-      <p class="tmg-card-sub">still in the NHL one year later</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">21 of 43 &middot; 95% CI 33.9 to 63.8</p>
-    </div>
-
-    <div class="tmg-card">
-      <p class="tmg-card-label">Matched comparators</p>
-      <p class="big">68.8%</p>
-      <p class="tmg-card-sub">still in the NHL one year later</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">88 of 128 &middot; 95% CI 60.7 to 76.8</p>
-    </div>
-
-    <div class="tmg-card">
-      <p class="tmg-card-label">Differential</p>
-      <p class="big neg">&minus;19.9</p>
-      <p class="tmg-card-sub">percentage points</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">95% CI &minus;36.9 to &minus;3.0 &middot; stable across nine specifications</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:8px">Those specifications vary how
-      comparators are matched. None varies who counts as a convert, which is the larger risk.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">The finding</p>
-      <h2 class="tmg-h2">Making the team on a tryout is not the comeback it looks like</h2>
-      <p>Every September a handful of veterans show up to an NHL camp with no contract.
-      They are on a professional tryout: permission to practise and play preseason games,
-      nothing more. A few earn a deal and make the roster. Those are the feel-good stories
-      of the preseason.</p>
-      <p>This study followed 43 of them across seven seasons and asked a simple question.
-      A year later, are they still in the league?</p>
-      <p>Just under half were. Comparable players who made the same rosters without a
-      tryout survived at roughly seven in ten. The gap is about 20 points.</p>
-      <p>That comparison is the whole point. A survival rate on its own says nothing,
-      because these are marginal players and marginal players wash out. The question is
-      whether they wash out faster than similar players who did not need a tryout to get
-      there. They do.</p>
-    </div>
-
-    <div class="tmg-card">
-      <p class="tmg-card-label">Fit durability</p>
-      <p class="big">6<span class="tmg-text-muted" style="font-size:22px"> of 43</span></p>
-      <p class="tmg-card-sub">still with the club that signed them</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">Fourteen percent. Among the
-      21 who survived, better than two in three had changed clubs.</p>
-    </div>
-
-    <div class="tmg-card">
-      <p class="tmg-card-label">Back on a tryout</p>
-      <p class="big">4<span class="tmg-text-muted" style="font-size:22px"> of 22</span></p>
-      <p class="tmg-card-sub">non-survivors on another tryout the next year</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">Treat as a floor. Several annual
-      tryout lists cover notable players only.</p>
-    </div>
-
-    <div class="tmg-card">
-      <p class="tmg-card-label">Scope</p>
-      <p class="big">7</p>
-      <p class="tmg-card-sub">seasons, 2018-19 through 2024-25</p>
-      <p class="tmg-body-sm tmg-text-muted" style="margin-top:10px">Converts verified against published
-      tryout sources rather than inferred from contract data. Two of the 43 remain unresolved.
-      Treat 43 as a lower bound.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">What counts as a convert</p>
-      <h2 class="tmg-h2">Three conditions, all of them strict</h2>
-      <ul>
-        <li>On a professional tryout in an NHL training camp.</li>
-        <li>Signed a standard contract with <em>that same club</em> on or before its opening night.</li>
-        <li>Played in at least one of that club's first ten games.</li>
-      </ul>
-      <p>The third condition matters more than it sounds. Signing a contract and making the
-      team are different outcomes. Three verified tryout converts in this set signed a deal
-      and never appeared for the club at all.</p>
-      <p>Players who signed after opening night are excluded, as are players who tried out
-      with one club and signed with another. Both are real and both are a different story
-      from the one this study is about.</p>
-      <p class="note">The full definitions, the identification method, and everything that
-      went wrong along the way are on the <a href="methods.html">methods page</a>. The study
-      was also put through a hostile review; that is on the <a href="audit.html">audit page</a>.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">The recirculators</p>
-      <h2 class="tmg-h2">Four players went back to a tryout the following year</h2>
-      <div class="scroll">
-      <table class="tmg-table">
-        <thead>
-          <tr>
-            <th scope="col">Player</th>
-            <th scope="col">Converted</th>
-            <th scope="col">Back on a tryout</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Alex Chiasson</td><td>2021-22, Vancouver</td><td>2022-23, Arizona</td></tr>
-          <tr><td>James Neal</td><td>2021-22, St. Louis</td><td>2022-23, Columbus</td></tr>
-          <tr><td>Zach Aston-Reese</td><td>2022-23, Toronto</td><td>2023-24, Carolina</td></tr>
-          <tr><td>Kevin Labanc</td><td>2024-25, Columbus</td><td>2025-26, Carolina (released)</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <p style="margin-top:14px">This was counted before any framing was written, which is
-      why it is four names and not a headline. An early read of the data suggested
-      recirculation might be the bigger story. Counting it properly showed otherwise.</p>
-      <p>The definition is also narrower than the phenomenon. Scott Harrington converted with
-      San Jose in 2022-23, did not survive, and turned up on a tryout in 2024-25 &mdash; two
-      years later, so outside the count by construction.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">Data</p>
-      <h2 class="tmg-h2">The dataset is published alongside the finding</h2>
-      <p>CapFriendly held the most complete public record of NHL tryouts and went offline in
-      July 2024. Nothing replaced it retroactively. Rebuilding this required assembling
-      candidates from contract timing and then verifying every one against published tryout
-      coverage, season by season.</p>
-      <p>What came out of that is a set of 43 camp converts across seven seasons, 41 of them verified,
-      each row carrying its tryout source, signing date, club, roster outcome and one-year
-      outcome. As far as I can tell nothing equivalent exists publicly.</p>
-      <p>The dataset, the scripts that built it, and the full decision log are in the
-      repository.</p>
-      <p style="margin-top:18px">
-        <a class="tmg-btn" href="https://github.com/rmallorybpc/nhl-pto-survival" target="_blank" rel="noreferrer">View the repository</a>
-        <a class="tmg-btn-ghost" href="methods.html" style="margin-left:8px">Read the methods</a>
-      </p>
-    </div>
-
-  </div>
-
-</div>
-<footer class="tmg-footer">The Mallory Group &middot; NHL PTO convert survival study &middot; Data through the 2024-25 season</footer>
-<script>
-(function(){
-  var b=document.getElementById('tmgDdBtn'), m=document.getElementById('tmgDdMenu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(e){
-    e.stopPropagation();
-    var open=m.classList.toggle('open');
-    b.classList.toggle('open',open);
-    b.setAttribute('aria-expanded',open?'true':'false');
-  });
-  document.addEventListener('click',function(){
-    m.classList.remove('open'); b.classList.remove('open');
-    b.setAttribute('aria-expanded','false');
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){ m.classList.remove('open'); b.classList.remove('open');
-      b.setAttribute('aria-expanded','false'); b.focus(); }
-  });
-})();
-</script>
-</body>
+    <footer class="tmg-footer">
+      The Mallory Group &middot; NHL PTO convert survival study &middot; Data
+      through the 2024-25 season
+    </footer>
+    <script>
+      (function () {
+        var b = document.getElementById("tmgDdBtn"),
+          m = document.getElementById("tmgDdMenu");
+        if (!b || !m) return;
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var open = m.classList.toggle("open");
+          b.classList.toggle("open", open);
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        document.addEventListener("click", function () {
+          m.classList.remove("open");
+          b.classList.remove("open");
+          b.setAttribute("aria-expanded", "false");
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            m.classList.remove("open");
+            b.classList.remove("open");
+            b.setAttribute("aria-expanded", "false");
+            b.focus();
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>

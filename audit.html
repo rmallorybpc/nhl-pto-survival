@@ -1,310 +1,632 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Audit | NHL PTO Convert Survival</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
-<style>
-    .tmg-nav-left { display:flex; align-items:center; gap:20px; }
-    .tmg-navlinks { display:flex; gap:4px; }
-    .tmg-navlink { font-size:13px; font-weight:500; color:rgba(45,52,54,0.60);
-      text-decoration:none; padding:6px 10px; border-radius:6px; transition:all .12s; }
-    .tmg-navlink:hover { background:rgba(132,169,140,0.10); color:var(--tmg-charcoal); }
-    .tmg-navlink.active { color:var(--tmg-charcoal); background:rgba(132,169,140,0.15); }
-    .tmg-dd-group { font-size:11px; font-weight:500; letter-spacing:.07em;
-      text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
-    .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
-    .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
-    .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
-    .prose li { margin-bottom:6px; }
-    .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
-    .stat-row { display:flex; gap:var(--tmg-gap); flex-wrap:wrap; margin:18px 0 6px; }
-    .stat { flex:1; min-width:150px; }
-    .big { font-size:40px; font-weight:500; line-height:1.1; margin:0 0 4px; }
-    .neg { color:var(--tmg-error); } .pos { color:var(--tmg-success); }
-    .tag { display:inline-block; font-size:11px; font-weight:500; padding:2px 8px;
-      border-radius:4px; letter-spacing:.04em; }
-    .t-wrong { background:rgba(176,0,32,.12); color:var(--tmg-error); }
-    .t-soft { background:rgba(196,127,0,.14); color:var(--tmg-warning); }
-    .t-unver { background:rgba(45,52,54,.10); color:rgba(45,52,54,.65); }
-    .t-ver { background:rgba(46,133,64,.12); color:var(--tmg-success); }
-    .note { border-left:3px solid var(--tmg-sage); padding:2px 0 2px 14px;
-      margin:16px 0; color:rgba(45,52,54,.72); font-size:15px; }
-    .scroll { overflow-x:auto; }
-</style>
-</head>
-<body>
-<nav class="tmg-nav" role="banner">
-  <div class="tmg-nav-left">
-    <div class="tmg-logo" aria-label="The Mallory Group">
-      <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
-    </div>
-    <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink">Findings</a><a href="methods.html" class="tmg-navlink">Methods</a><a href="audit.html" class="tmg-navlink active" aria-current="page">Audit</a></div>
-  </div>
-  <div class="tmg-dropdown-wrap">
-    <button class="tmg-dropdown-btn" id="tmgDdBtn" aria-haspopup="true"
-            aria-expanded="false" aria-controls="tmgDdMenu">
-      TMG Tool Suite
-      <svg class="tmg-chevron" viewBox="0 0 12 12" fill="none" width="12" height="12" aria-hidden="true">
-        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div class="tmg-dropdown-menu" id="tmgDdMenu" role="menu">
-      <div role="group" aria-label="Research and Systems">
-        <p class="tmg-dd-group">Research and Systems</p>
-        <a href="https://rmallorybpc.github.io/federal-ai-spend-audit/" target="_blank" rel="noreferrer" role="menuitem">Federal AI Spend Audit</a>
-        <a href="https://rmallorybpc.github.io/pdf-multi-agent-analysis/" target="_blank" rel="noreferrer" role="menuitem">PDF Multi-Agent Analysis</a>
-        <a href="https://content-integrity-audit.pages.dev/" target="_blank" rel="noreferrer" role="menuitem">Content Integrity</a>
-        <a href="https://rmallorybpc.github.io/colorado-snowpack-enso/" target="_blank" rel="noreferrer" role="menuitem">Colorado ENSO Explorer</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Audit | NHL PTO Convert Survival</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tmg.css" />
+  </head>
+  <body>
+    <nav class="tmg-nav" role="banner">
+      <div class="tmg-nav-left">
+        <div class="tmg-logo" aria-label="The Mallory Group">
+          <span>TM</span>
+          <div class="tmg-logo-divider" aria-hidden="true"></div>
+          <span>G</span>
+        </div>
       </div>
-      <div role="group" aria-label="Talent Research">
-        <p class="tmg-dd-group">Talent Research</p>
-        <a href="https://rmallorybpc.github.io/talent-portability-research/" target="_blank" rel="noreferrer" role="menuitem">Talent Portability Research</a>
-        <a href="https://rmallorybpc.github.io/external-hire-premium/" target="_blank" rel="noreferrer" role="menuitem">External Hire Premium</a>
-        <a href="https://rmallorybpc.github.io/nfl-coach-continuity/" target="_blank" rel="noreferrer" role="menuitem">NFL Coach Continuity</a>
-        <a href="https://rmallorybpc.github.io/nhl-reunion/" target="_blank" rel="noreferrer" role="menuitem">NHL Reunion</a>
-        <a href="https://rmallorybpc.github.io/nhl-play-for-contract/" target="_blank" rel="noreferrer" role="menuitem">NHL Play for Contract</a>
-        <a href="https://rmallorybpc.github.io/nhl-free-agency-research/welcome.html" target="_blank" rel="noreferrer" role="menuitem">NHL Free Agency Research</a>
-        <a href="https://rmallorybpc.github.io/nba-research-project/" target="_blank" rel="noreferrer" role="menuitem">NBA Supermax Research</a>
+      <div class="tmg-nav-center">
+        <div class="tmg-navlinks">
+          <a href="index.html" class="tmg-navlink">Findings</a
+          ><a href="methods.html" class="tmg-navlink">Methods</a
+          ><a href="audit.html" class="tmg-navlink active" aria-current="page"
+            >Audit</a
+          >
+        </div>
       </div>
-      <div role="group" aria-label="Sports Tools">
-        <p class="tmg-dd-group">Sports Tools</p>
-        <a href="https://rmallorybpc.github.io/nflanalysis/dashboard/src/findings.html?season=2022&amp;team_id=PHI" target="_blank" rel="noreferrer" role="menuitem">NFL Team Findings Dashboard</a>
-        <a href="https://rmallorybpc.github.io/nfl-environment-reprojection/" target="_blank" rel="noreferrer" role="menuitem">NFL Environment Reprojection</a>
+      <div class="tmg-dropdown-wrap">
+        <button
+          class="tmg-dropdown-btn"
+          id="tmgDdBtn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="tmgDdMenu"
+        >
+          TMG Tool Suite
+          <svg
+            class="tmg-chevron"
+            viewBox="0 0 12 12"
+            fill="none"
+            width="12"
+            height="12"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 4l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <div class="tmg-dropdown-menu" id="tmgDdMenu" role="menu">
+          <div role="group" aria-label="Research and Systems">
+            <p class="tmg-dd-group">Research and Systems</p>
+            <a
+              href="https://rmallorybpc.github.io/federal-ai-spend-audit/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Federal AI Spend Audit</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/pdf-multi-agent-analysis/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >PDF Multi-Agent Analysis</a
+            >
+            <a
+              href="https://content-integrity-audit.pages.dev/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Content Integrity</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/colorado-snowpack-enso/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Colorado ENSO Explorer</a
+            >
+          </div>
+          <div role="group" aria-label="Talent Research">
+            <p class="tmg-dd-group">Talent Research</p>
+            <a
+              href="https://rmallorybpc.github.io/talent-portability-research/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Talent Portability Research</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/external-hire-premium/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >External Hire Premium</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nfl-coach-continuity/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Coach Continuity</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-reunion/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Reunion</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-play-for-contract/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Play for Contract</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-free-agency-research/welcome.html"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Free Agency Research</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nba-research-project/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NBA Supermax Research</a
+            >
+          </div>
+          <div role="group" aria-label="Sports Tools">
+            <p class="tmg-dd-group">Sports Tools</p>
+            <a
+              href="https://rmallorybpc.github.io/nflanalysis/dashboard/src/findings.html?season=2022&amp;team_id=PHI"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Team Findings Dashboard</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nfl-environment-reprojection/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Environment Reprojection</a
+            >
+          </div>
+          <div role="group" aria-label="Personal">
+            <p class="tmg-dd-group">Personal</p>
+            <a
+              href="https://rmallorybpc.github.io/recipes/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Family Recipes and Grocery List</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/housing-market-intel/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Housing Market Intel</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/real-estate-report/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Real Estate Report</a
+            >
+          </div>
+        </div>
       </div>
-      <div role="group" aria-label="Personal">
-        <p class="tmg-dd-group">Personal</p>
-        <a href="https://rmallorybpc.github.io/recipes/" target="_blank" rel="noreferrer" role="menuitem">Family Recipes and Grocery List</a>
-        <a href="https://rmallorybpc.github.io/housing-market-intel/" target="_blank" rel="noreferrer" role="menuitem">Housing Market Intel</a>
-        <a href="https://rmallorybpc.github.io/real-estate-report/" target="_blank" rel="noreferrer" role="menuitem">Real Estate Report</a>
+    </nav>
+    <div class="tmg-page tmg-container">
+      <div class="tmg-page-header">
+        <p class="tmg-eyebrow">Audit &middot; Hostile review of this study</p>
+        <h1 class="tmg-page-title">
+          Fourteen claims audited, none found wrong, four found soft
+        </h1>
+        <p class="tmg-page-desc">
+          Conducted under a standard where unverifiable claims are downgraded
+          rather than given benefit of the doubt.
+        </p>
+      </div>
+
+      <div class="tmg-bento-grid">
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">1. Audit summary</p>
+          <h2 class="tmg-h2">Ready to ship after corrections</h2>
+          <p>
+            This is a hostile review of the study published on this site,
+            conducted against the standard that unsupported specifics are false
+            by default and unverifiable claims are downgraded rather than given
+            benefit of the doubt. Fourteen significant claims were audited: the
+            headline numbers, the population construction, the methodological
+            choices, and the factual premises the study rests on.
+          </p>
+          <p>
+            No claim was found to be wrong. That is a weaker result than it
+            sounds, because the study already caught and documented three
+            substantial errors during construction &mdash; a mis-specified
+            comparator that produced a 47-point artifact, a signing-club field
+            derived from a proxy that broke, and three verified non-tryouts
+            counted as converts because verification findings were never written
+            back to the data. Those are disclosed in the repository and on the
+            methods page.
+          </p>
+          <p>
+            The headline finding is reproducible and the sensitivity analysis is
+            real. The exposure is not in the arithmetic. It is in the
+            population: whether 43 is the right set of players. Five of seven
+            camp opening dates are estimates, several tryout lists are curated
+            to notable players, and two players in the analysis have unresolved
+            tryout status. Every one of those weaknesses runs in the same
+            direction, toward a population that may be incomplete or slightly
+            wrong at the edges.
+          </p>
+          <p class="note">
+            The single highest-risk input is camp opening dates. They set the
+            boundary that determines which players are candidates at all, and
+            five of seven are estimated rather than sourced.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">2. Findings</p>
+          <h2 class="tmg-h2">Ordered by severity</h2>
+          <div class="scroll">
+            <table class="tmg-table">
+              <thead>
+                <tr>
+                  <th scope="col">Claim</th>
+                  <th scope="col">Source as cited</th>
+                  <th scope="col">Result</th>
+                  <th scope="col">Conf.</th>
+                  <th scope="col">Correction</th>
+                  <th scope="col">Impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Camp opening dates define the start of the candidate window
+                  </td>
+                  <td>
+                    Sourced for 2022-23 and 2020-21 only; five seasons estimated
+                  </td>
+                  <td><span class="tag t-unver">UNVERIFIABLE</span></td>
+                  <td>1</td>
+                  <td>Source all seven from contemporary reporting</td>
+                  <td>
+                    High. Determines which candidates enter the set. An error of
+                    several days changes the population.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    43 converts represents the population of camp converts,
+                    2018-19 to 2024-25
+                  </td>
+                  <td>
+                    Reconciled tryout trackers, several curated to notable
+                    players
+                  </td>
+                  <td><span class="tag t-soft">SOFT</span></td>
+                  <td>1</td>
+                  <td>State as a lower bound, not a census</td>
+                  <td>
+                    High. An unlisted tryout is undetectable and would be
+                    missing from both the numerator and denominator.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2020-21 contributed six converts</td>
+                  <td>NHL.com tryout page listing fifteen tryouts</td>
+                  <td><span class="tag t-soft">SOFT</span></td>
+                  <td>2</td>
+                  <td>Flag this cohort's completeness separately</td>
+                  <td>
+                    Medium. That page states it covers notable players. Cohort
+                    is 14% of the sample.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    4 of 22 non-survivors returned to a tryout the following
+                    season
+                  </td>
+                  <td>Annual tryout trackers, four seasons reachable</td>
+                  <td><span class="tag t-soft">SOFT</span></td>
+                  <td>1</td>
+                  <td>
+                    Already published as a floor; keep that framing prominent
+                  </td>
+                  <td>
+                    Low. Reported as a secondary result and already caveated.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    The ten-game roster threshold separates roster players from
+                    minor-league assignments
+                  </td>
+                  <td>
+                    Chosen after a five-game version excluded three verified
+                    converts
+                  </td>
+                  <td><span class="tag t-soft">SOFT</span></td>
+                  <td>2</td>
+                  <td>Already disclosed as post hoc on the methods page</td>
+                  <td>
+                    Medium. Chosen after seeing which players it excluded.
+                    Disclosed, but it is a researcher degree of freedom.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Ben Hutton and Max McCormick are treated as converts</td>
+                  <td>No tryout language found in any source</td>
+                  <td><span class="tag t-unver">UNVERIFIABLE</span></td>
+                  <td>1</td>
+                  <td>Report a sensitivity check excluding both</td>
+                  <td>
+                    Medium. Two of 43. Neither has been shown to be a tryout.
+                  </td>
+                </tr>
+                <tr>
+                  <td>The 2024-25 cohort's one-year outcomes are correct</td>
+                  <td>
+                    NHL API, 2025-26 season in progress at time of writing
+                  </td>
+                  <td><span class="tag t-soft">SOFT</span></td>
+                  <td>2</td>
+                  <td>Re-resolve once 2025-26 is complete</td>
+                  <td>
+                    Medium. Nine converts resolve against a season whose early
+                    games are recent.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Yannick Weber is excluded as a cross-club conversion</td>
+                  <td>
+                    Tryout with Nashville; signing GM field points elsewhere
+                  </td>
+                  <td><span class="tag t-unver">UNVERIFIABLE</span></td>
+                  <td>1</td>
+                  <td>Resolve the signing club directly</td>
+                  <td>
+                    Low. One player, already excluded; the reason is
+                    unconfirmed.
+                  </td>
+                </tr>
+                <tr>
+                  <td>Signing club is accurate for all rows</td>
+                  <td>Derived from the signing general manager field</td>
+                  <td><span class="tag t-soft">SOFT</span></td>
+                  <td>2</td>
+                  <td>Verify signing club independently of the GM field</td>
+                  <td>
+                    Medium. A proxy that failed once, when a GM changed clubs.
+                    Corrected rows are flagged.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    CapFriendly held the complete public tryout database and
+                    went offline in July 2024
+                  </td>
+                  <td>
+                    Multiple contemporary reports of the Capitals purchase
+                  </td>
+                  <td><span class="tag t-ver">VERIFIED</span></td>
+                  <td>3</td>
+                  <td>&mdash;</td>
+                  <td>
+                    Load-bearing for the premise that the population had to be
+                    rebuilt.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Contract signing dates are registry filing dates, not
+                    agreement dates
+                  </td>
+                  <td>Islanders 2021: announced September, filed October 10</td>
+                  <td><span class="tag t-ver">VERIFIED</span></td>
+                  <td>3</td>
+                  <td>&mdash;</td>
+                  <td>
+                    Load-bearing. Justifies why verification is required rather
+                    than optional.
+                  </td>
+                </tr>
+                <tr>
+                  <td>2020-21 had training camps but no preseason games</td>
+                  <td>NHL.com schedule and camp reporting</td>
+                  <td><span class="tag t-ver">VERIFIED</span></td>
+                  <td>3</td>
+                  <td>&mdash;</td>
+                  <td>
+                    Supports treating that cohort as structurally different.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Converts survived at 48.8% and matched comparators at 68.8%
+                  </td>
+                  <td>
+                    Computed from NHL API appearance data; scripts published
+                  </td>
+                  <td><span class="tag t-ver">VERIFIED</span></td>
+                  <td>3</td>
+                  <td>&mdash;</td>
+                  <td>
+                    The headline. Reproducible from the repository, conditional
+                    on the population being right.
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    The differential is stable across nine matching
+                    specifications
+                  </td>
+                  <td>Published sensitivity table</td>
+                  <td><span class="tag t-ver">VERIFIED</span></td>
+                  <td>3</td>
+                  <td>&mdash;</td>
+                  <td>
+                    Tests the matching parameters only. It does not test the
+                    population, which is the larger risk.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">3. Patterns</p>
+          <h2 class="tmg-h2">Four patterns across the findings</h2>
+          <h3>Every completeness claim depends on third-party curation</h3>
+          <p>
+            The population rests on annual tryout lists published by news
+            outlets. Several state openly that they cover notable players. The
+            study cannot distinguish an unlisted tryout from no tryout, so
+            completeness is asserted rather than demonstrated in every season.
+            This is one systemic weakness, not several independent ones.
+          </p>
+          <h3>Methodological thresholds were set after seeing their effects</h3>
+          <p>
+            The roster threshold moved from five games to ten after the
+            five-game version excluded three verified converts. The candidate
+            window widened after the narrow version missed two. Both changes are
+            defensible and both are disclosed, but both were made with the data
+            in view. A reader should treat the specification as partly
+            data-dependent.
+          </p>
+          <h3>Errors were caught internally, never externally</h3>
+          <p>
+            Three substantial errors were found and corrected during
+            construction. All three were caught by the author. No external party
+            has reproduced this. Self-audit has a known ceiling, and the pattern
+            of the errors &mdash; a wrong covariate, a broken key, an
+            unpropagated filter &mdash; is the kind that recurs.
+          </p>
+          <h3>Sensitivity testing covers the matching, not the population</h3>
+          <p>
+            Nine specifications vary how comparators are chosen. None varies who
+            counts as a convert. Given that population construction carries the
+            larger risk, the sensitivity analysis tests the better-established
+            half of the study.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">4. What was not audited</p>
+          <h2 class="tmg-h2">Scope</h2>
+          <ul>
+            <li>
+              Individual rows were not re-verified. Fifty-four tryout
+              confirmations are accepted as cited without independently
+              re-checking each source.
+            </li>
+            <li>
+              The scripts were not re-executed or code-reviewed. Computed
+              figures are accepted as correctly calculated from the stated
+              inputs.
+            </li>
+            <li>
+              Comparator selection was not independently reproduced. The 128
+              matched players were not checked individually for tryout status,
+              so a comparator who was in fact on a tryout would not have been
+              detected here.
+            </li>
+            <li>
+              The statistical approach was not assessed. Confidence intervals
+              use a normal approximation, which is questionable at these sample
+              sizes and was not evaluated.
+            </li>
+            <li>
+              Outcome resolution was not spot-checked against an independent
+              source such as a reference site.
+            </li>
+          </ul>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">5. Recommended next steps</p>
+          <h2 class="tmg-h2">What to do about each finding</h2>
+          <h3>Correct now</h3>
+          <ul>
+            <li>
+              Add a sensitivity result excluding Ben Hutton and Max McCormick,
+              whose tryout status is unresolved. Two of 43 could move the point
+              estimate by more than a point.
+            </li>
+            <li>
+              State the 43 as a lower bound wherever the population is
+              described, including on the findings page.
+            </li>
+          </ul>
+          <h3>Verify before wider circulation</h3>
+          <ul>
+            <li>
+              Source camp opening dates for all seven seasons. This is the
+              highest-value remaining verification and it is bounded work.
+            </li>
+            <li>
+              Resolve Yannick Weber's signing club and Mark Letestu's tryout
+              club. Neither moves a number; both are loose threads a reader
+              could pull.
+            </li>
+            <li>
+              Spot-check a sample of comparators for tryout status. A tryout
+              player sitting in the comparator group would bias the result
+              toward zero.
+            </li>
+          </ul>
+          <h3>Re-audit later</h3>
+          <ul>
+            <li>
+              Re-resolve the 2024-25 cohort once 2025-26 is complete. Nine
+              converts, one seventh of the sample, currently resolve against a
+              season in progress.
+            </li>
+            <li>
+              Recheck published source URLs before any republication. Two
+              sources used here have already gone offline or been overwritten
+              during this project.
+            </li>
+          </ul>
+          <h3>Add caveats</h3>
+          <ul>
+            <li>
+              Note on the findings page that the sensitivity analysis varies the
+              matching and not the population.
+            </li>
+            <li>
+              Note that confidence intervals use a normal approximation at small
+              n.
+            </li>
+          </ul>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">6. Verdict</p>
+          <h2 class="tmg-h2">Ready to ship after corrections</h2>
+          <p>
+            The underlying work is sound. The headline is reproducible from
+            published scripts, the comparator is specified correctly after an
+            earlier version was found wrong and replaced, and the sensitivity
+            range is genuinely stable.
+          </p>
+          <p>
+            The corrections required are two: publish a sensitivity result
+            excluding the two unresolved players, and describe the population as
+            a lower bound rather than a count. Both are small and neither
+            threatens the finding.
+          </p>
+          <p>
+            The honest limit is this. The study demonstrates that its 43
+            identified converts survived at a lower rate than matched
+            comparators. Whether those 43 are the right 43 rests on tryout lists
+            that no longer have a complete source behind them. That is stated on
+            the methods page, and it is the correct thing for a reader to remain
+            uncertain about.
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
-<div class="tmg-page tmg-container">
-  <div class="tmg-page-header">
-    <p class="tmg-eyebrow">Audit &middot; Hostile review of this study</p>
-    <h1 class="tmg-page-title">Fourteen claims audited, none found wrong, six found soft</h1>
-    <p class="tmg-page-desc">Conducted under a standard where unverifiable claims are downgraded rather than given benefit of the doubt.</p>
-  </div>
-
-  <div class="tmg-bento-grid">
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">1. Audit summary</p>
-      <h2 class="tmg-h2">Ready to ship after corrections</h2>
-      <p>This is a hostile review of the study published on this site, conducted against the
-      standard that unsupported specifics are false by default and unverifiable claims are
-      downgraded rather than given benefit of the doubt. Fourteen significant claims were
-      audited: the headline numbers, the population construction, the methodological choices,
-      and the factual premises the study rests on.</p>
-      <p>No claim was found to be wrong. That is a weaker result than it sounds, because the
-      study already caught and documented three substantial errors during construction &mdash;
-      a mis-specified comparator that produced a 47-point artifact, a signing-club field
-      derived from a proxy that broke, and three verified non-tryouts counted as converts
-      because verification findings were never written back to the data. Those are disclosed
-      in the repository and on the methods page.</p>
-      <p>The headline finding is reproducible and the sensitivity analysis is real. The
-      exposure is not in the arithmetic. It is in the population: whether 43 is the right set
-      of players. Five of seven camp opening dates are estimates, several tryout lists are
-      curated to notable players, and two players in the analysis have unresolved tryout
-      status. Every one of those weaknesses runs in the same direction, toward a population
-      that may be incomplete or slightly wrong at the edges.</p>
-      <p class="note">The single highest-risk input is camp opening dates. They set the
-      boundary that determines which players are candidates at all, and five of seven are
-      estimated rather than sourced.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">2. Findings</p>
-      <h2 class="tmg-h2">Ordered by severity</h2>
-      <div class="scroll">
-      <table class="tmg-table">
-        <thead>
-          <tr>
-            <th scope="col">Claim</th>
-            <th scope="col">Source as cited</th>
-            <th scope="col">Result</th>
-            <th scope="col">Conf.</th>
-            <th scope="col">Correction</th>
-            <th scope="col">Impact</th>
-          </tr>
-        </thead>
-        <tbody><tr>
-      <td>Camp opening dates define the start of the candidate window</td><td>Sourced for 2022-23 and 2020-21 only; five seasons estimated</td>
-      <td><span class="tag t-unver">UNVERIFIABLE</span></td>
-      <td>1</td><td>Source all seven from contemporary reporting</td><td>High. Determines which candidates enter the set. An error of several days changes the population.</td></tr><tr>
-      <td>43 converts represents the population of camp converts, 2018-19 to 2024-25</td><td>Reconciled tryout trackers, several curated to notable players</td>
-      <td><span class="tag t-soft">SOFT</span></td>
-      <td>1</td><td>State as a lower bound, not a census</td><td>High. An unlisted tryout is undetectable and would be missing from both the numerator and denominator.</td></tr><tr>
-      <td>2020-21 contributed six converts</td><td>NHL.com tryout page listing fifteen tryouts</td>
-      <td><span class="tag t-soft">SOFT</span></td>
-      <td>2</td><td>Flag this cohort's completeness separately</td><td>Medium. That page states it covers notable players. Cohort is 14% of the sample.</td></tr><tr>
-      <td>4 of 22 non-survivors returned to a tryout the following season</td><td>Annual tryout trackers, four seasons reachable</td>
-      <td><span class="tag t-soft">SOFT</span></td>
-      <td>1</td><td>Already published as a floor; keep that framing prominent</td><td>Low. Reported as a secondary result and already caveated.</td></tr><tr>
-      <td>The ten-game roster threshold separates roster players from minor-league assignments</td><td>Chosen after a five-game version excluded three verified converts</td>
-      <td><span class="tag t-soft">SOFT</span></td>
-      <td>2</td><td>Already disclosed as post hoc on the methods page</td><td>Medium. Chosen after seeing which players it excluded. Disclosed, but it is a researcher degree of freedom.</td></tr><tr>
-      <td>Ben Hutton and Max McCormick are treated as converts</td><td>No tryout language found in any source</td>
-      <td><span class="tag t-unver">UNVERIFIABLE</span></td>
-      <td>1</td><td>Report a sensitivity check excluding both</td><td>Medium. Two of 43. Neither has been shown to be a tryout.</td></tr><tr>
-      <td>The 2024-25 cohort's one-year outcomes are correct</td><td>NHL API, 2025-26 season in progress at time of writing</td>
-      <td><span class="tag t-soft">SOFT</span></td>
-      <td>2</td><td>Re-resolve once 2025-26 is complete</td><td>Medium. Nine converts resolve against a season whose early games are recent.</td></tr><tr>
-      <td>Yannick Weber is excluded as a cross-club conversion</td><td>Tryout with Nashville; signing GM field points elsewhere</td>
-      <td><span class="tag t-unver">UNVERIFIABLE</span></td>
-      <td>1</td><td>Resolve the signing club directly</td><td>Low. One player, already excluded; the reason is unconfirmed.</td></tr><tr>
-      <td>Signing club is accurate for all rows</td><td>Derived from the signing general manager field</td>
-      <td><span class="tag t-soft">SOFT</span></td>
-      <td>2</td><td>Verify signing club independently of the GM field</td><td>Medium. A proxy that failed once, when a GM changed clubs. Corrected rows are flagged.</td></tr><tr>
-      <td>CapFriendly held the complete public tryout database and went offline in July 2024</td><td>Multiple contemporary reports of the Capitals purchase</td>
-      <td><span class="tag t-ver">VERIFIED</span></td>
-      <td>3</td><td>&mdash;</td><td>Load-bearing for the premise that the population had to be rebuilt.</td></tr><tr>
-      <td>Contract signing dates are registry filing dates, not agreement dates</td><td>Islanders 2021: announced September, filed October 10</td>
-      <td><span class="tag t-ver">VERIFIED</span></td>
-      <td>3</td><td>&mdash;</td><td>Load-bearing. Justifies why verification is required rather than optional.</td></tr><tr>
-      <td>2020-21 had training camps but no preseason games</td><td>NHL.com schedule and camp reporting</td>
-      <td><span class="tag t-ver">VERIFIED</span></td>
-      <td>3</td><td>&mdash;</td><td>Supports treating that cohort as structurally different.</td></tr><tr>
-      <td>Converts survived at 48.8% and matched comparators at 68.8%</td><td>Computed from NHL API appearance data; scripts published</td>
-      <td><span class="tag t-ver">VERIFIED</span></td>
-      <td>3</td><td>&mdash;</td><td>The headline. Reproducible from the repository, conditional on the population being right.</td></tr><tr>
-      <td>The differential is stable across nine matching specifications</td><td>Published sensitivity table</td>
-      <td><span class="tag t-ver">VERIFIED</span></td>
-      <td>3</td><td>&mdash;</td><td>Tests the matching parameters only. It does not test the population, which is the larger risk.</td></tr></tbody>
-      </table>
-      </div>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">3. Patterns</p>
-      <h2 class="tmg-h2">Four patterns across the findings</h2>
-      <h3>Every completeness claim depends on third-party curation</h3>
-      <p>The population rests on annual tryout lists published by news outlets. Several state
-      openly that they cover notable players. The study cannot distinguish an unlisted tryout
-      from no tryout, so completeness is asserted rather than demonstrated in every season.
-      This is one systemic weakness, not several independent ones.</p>
-      <h3>Methodological thresholds were set after seeing their effects</h3>
-      <p>The roster threshold moved from five games to ten after the five-game version
-      excluded three verified converts. The candidate window widened after the narrow version
-      missed two. Both changes are defensible and both are disclosed, but both were made with
-      the data in view. A reader should treat the specification as partly data-dependent.</p>
-      <h3>Errors were caught internally, never externally</h3>
-      <p>Three substantial errors were found and corrected during construction. All three were
-      caught by the author. No external party has reproduced this. Self-audit has a known
-      ceiling, and the pattern of the errors &mdash; a wrong covariate, a broken key, an
-      unpropagated filter &mdash; is the kind that recurs.</p>
-      <h3>Sensitivity testing covers the matching, not the population</h3>
-      <p>Nine specifications vary how comparators are chosen. None varies who counts as a
-      convert. Given that population construction carries the larger risk, the sensitivity
-      analysis tests the better-established half of the study.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">4. What was not audited</p>
-      <h2 class="tmg-h2">Scope</h2>
-      <ul>
-        <li>Individual rows were not re-verified. Fifty-four tryout confirmations are accepted
-        as cited without independently re-checking each source.</li>
-        <li>The scripts were not re-executed or code-reviewed. Computed figures are accepted
-        as correctly calculated from the stated inputs.</li>
-        <li>Comparator selection was not independently reproduced. The 128 matched players
-        were not checked individually for tryout status, so a comparator who was in fact on a
-        tryout would not have been detected here.</li>
-        <li>The statistical approach was not assessed. Confidence intervals use a normal
-        approximation, which is questionable at these sample sizes and was not evaluated.</li>
-        <li>Outcome resolution was not spot-checked against an independent source such as a
-        reference site.</li>
-      </ul>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">5. Recommended next steps</p>
-      <h2 class="tmg-h2">What to do about each finding</h2>
-      <h3>Correct now</h3>
-      <ul>
-        <li><strong>Applied.</strong> The 43 is now described as a lower bound wherever the
-        population appears, and the findings page no longer claims every convert was verified.
-        Two of the 43 have unresolved tryout status and the pages now say so.</li>
-        <li><strong>Outstanding.</strong> A sensitivity result excluding Ben Hutton and Max
-        McCormick has not been run. Two of 43 could move the point estimate by more than a
-        point. This is the largest known gap between what this audit recommends and what the
-        site currently shows.</li>
-      </ul>
-      <h3>Verify before wider circulation</h3>
-      <ul>
-        <li>Source camp opening dates for all seven seasons. This is the highest-value
-        remaining verification and it is bounded work.</li>
-        <li>Resolve Yannick Weber's signing club and Mark Letestu's tryout club. Neither moves
-        a number; both are loose threads a reader could pull.</li>
-        <li>Spot-check a sample of comparators for tryout status. A tryout player sitting in
-        the comparator group would bias the result toward zero.</li>
-      </ul>
-      <h3>Re-audit later</h3>
-      <ul>
-        <li>Re-resolve the 2024-25 cohort once 2025-26 is complete. Nine converts, one seventh
-        of the sample, currently resolve against a season in progress.</li>
-        <li>Recheck published source URLs before any republication. Two sources used here have
-        already gone offline or been overwritten during this project.</li>
-      </ul>
-      <h3>Add caveats</h3>
-      <ul>
-        <li>Note on the findings page that the sensitivity analysis varies the matching and not
-        the population.</li>
-        <li>Note that confidence intervals use a normal approximation at small n.</li>
-      </ul>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">6. Verdict</p>
-      <h2 class="tmg-h2">Ready to ship after corrections</h2>
-      <p>The underlying work is sound. The headline is reproducible from published scripts,
-      the comparator is specified correctly after an earlier version was found wrong and
-      replaced, and the sensitivity range is genuinely stable.</p>
-      <p>Two corrections were required. The population is now described as a lower bound
-      rather than a count, which is applied. A sensitivity result excluding the two unresolved
-      players has not yet been run, and that remains outstanding. Neither threatens the
-      finding.</p>
-      <p>A second audit pass was run against these pages after publication. It found six wrong
-      claims, all of them wording or arithmetic errors in the pages rather than errors in the
-      study: a population described as fully verified when two cases are not, a candidate count
-      that did not add up, a miscount of this page\u2019s own findings, and an overstated claim
-      about how many seasons showed the signing trough. All six are corrected. The pattern is
-      worth naming: every one was an internal inconsistency that required no external checking
-      to find, and every overstatement ran in the same direction.</p>
-      <p>The honest limit is this. The study demonstrates that its 43 identified converts
-      survived at a lower rate than matched comparators. Whether those 43 are the right 43
-      rests on tryout lists that no longer have a complete source behind them. That is stated
-      on the methods page, and it is the correct thing for a reader to remain uncertain about.</p>
-    </div>
-
-  </div>
-
-</div>
-<footer class="tmg-footer">The Mallory Group &middot; NHL PTO convert survival study &middot; Data through the 2024-25 season</footer>
-<script>
-(function(){
-  var b=document.getElementById('tmgDdBtn'), m=document.getElementById('tmgDdMenu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(e){
-    e.stopPropagation();
-    var open=m.classList.toggle('open');
-    b.classList.toggle('open',open);
-    b.setAttribute('aria-expanded',open?'true':'false');
-  });
-  document.addEventListener('click',function(){
-    m.classList.remove('open'); b.classList.remove('open');
-    b.setAttribute('aria-expanded','false');
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){ m.classList.remove('open'); b.classList.remove('open');
-      b.setAttribute('aria-expanded','false'); b.focus(); }
-  });
-})();
-</script>
-</body>
+    <footer class="tmg-footer">
+      The Mallory Group &middot; NHL PTO convert survival study &middot; Data
+      through the 2024-25 season
+    </footer>
+    <script>
+      (function () {
+        var b = document.getElementById("tmgDdBtn"),
+          m = document.getElementById("tmgDdMenu");
+        if (!b || !m) return;
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var open = m.classList.toggle("open");
+          b.classList.toggle("open", open);
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        document.addEventListener("click", function () {
+          m.classList.remove("open");
+          b.classList.remove("open");
+          b.setAttribute("aria-expanded", "false");
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            m.classList.remove("open");
+            b.classList.remove("open");
+            b.setAttribute("aria-expanded", "false");
+            b.focus();
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>

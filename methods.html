@@ -1,319 +1,615 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Methods | NHL PTO Convert Survival</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
-<style>
-    .tmg-nav-left { display:flex; align-items:center; gap:20px; }
-    .tmg-navlinks { display:flex; gap:4px; }
-    .tmg-navlink { font-size:13px; font-weight:500; color:rgba(45,52,54,0.60);
-      text-decoration:none; padding:6px 10px; border-radius:6px; transition:all .12s; }
-    .tmg-navlink:hover { background:rgba(132,169,140,0.10); color:var(--tmg-charcoal); }
-    .tmg-navlink.active { color:var(--tmg-charcoal); background:rgba(132,169,140,0.15); }
-    .tmg-dd-group { font-size:11px; font-weight:500; letter-spacing:.07em;
-      text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
-    .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
-    .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
-    .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
-    .prose li { margin-bottom:6px; }
-    .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
-    .stat-row { display:flex; gap:var(--tmg-gap); flex-wrap:wrap; margin:18px 0 6px; }
-    .stat { flex:1; min-width:150px; }
-    .big { font-size:40px; font-weight:500; line-height:1.1; margin:0 0 4px; }
-    .neg { color:var(--tmg-error); } .pos { color:var(--tmg-success); }
-    .tag { display:inline-block; font-size:11px; font-weight:500; padding:2px 8px;
-      border-radius:4px; letter-spacing:.04em; }
-    .t-wrong { background:rgba(176,0,32,.12); color:var(--tmg-error); }
-    .t-soft { background:rgba(196,127,0,.14); color:var(--tmg-warning); }
-    .t-unver { background:rgba(45,52,54,.10); color:rgba(45,52,54,.65); }
-    .t-ver { background:rgba(46,133,64,.12); color:var(--tmg-success); }
-    .note { border-left:3px solid var(--tmg-sage); padding:2px 0 2px 14px;
-      margin:16px 0; color:rgba(45,52,54,.72); font-size:15px; }
-    .scroll { overflow-x:auto; }
-</style>
-</head>
-<body>
-<nav class="tmg-nav" role="banner">
-  <div class="tmg-nav-left">
-    <div class="tmg-logo" aria-label="The Mallory Group">
-      <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
-    </div>
-    <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink">Findings</a><a href="methods.html" class="tmg-navlink active" aria-current="page">Methods</a><a href="audit.html" class="tmg-navlink">Audit</a></div>
-  </div>
-  <div class="tmg-dropdown-wrap">
-    <button class="tmg-dropdown-btn" id="tmgDdBtn" aria-haspopup="true"
-            aria-expanded="false" aria-controls="tmgDdMenu">
-      TMG Tool Suite
-      <svg class="tmg-chevron" viewBox="0 0 12 12" fill="none" width="12" height="12" aria-hidden="true">
-        <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div class="tmg-dropdown-menu" id="tmgDdMenu" role="menu">
-      <div role="group" aria-label="Research and Systems">
-        <p class="tmg-dd-group">Research and Systems</p>
-        <a href="https://rmallorybpc.github.io/federal-ai-spend-audit/" target="_blank" rel="noreferrer" role="menuitem">Federal AI Spend Audit</a>
-        <a href="https://rmallorybpc.github.io/pdf-multi-agent-analysis/" target="_blank" rel="noreferrer" role="menuitem">PDF Multi-Agent Analysis</a>
-        <a href="https://content-integrity-audit.pages.dev/" target="_blank" rel="noreferrer" role="menuitem">Content Integrity</a>
-        <a href="https://rmallorybpc.github.io/colorado-snowpack-enso/" target="_blank" rel="noreferrer" role="menuitem">Colorado ENSO Explorer</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Methods | NHL PTO Convert Survival</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="tmg.css" />
+  </head>
+  <body>
+    <nav class="tmg-nav" role="banner">
+      <div class="tmg-nav-left">
+        <div class="tmg-logo" aria-label="The Mallory Group">
+          <span>TM</span>
+          <div class="tmg-logo-divider" aria-hidden="true"></div>
+          <span>G</span>
+        </div>
       </div>
-      <div role="group" aria-label="Talent Research">
-        <p class="tmg-dd-group">Talent Research</p>
-        <a href="https://rmallorybpc.github.io/talent-portability-research/" target="_blank" rel="noreferrer" role="menuitem">Talent Portability Research</a>
-        <a href="https://rmallorybpc.github.io/external-hire-premium/" target="_blank" rel="noreferrer" role="menuitem">External Hire Premium</a>
-        <a href="https://rmallorybpc.github.io/nfl-coach-continuity/" target="_blank" rel="noreferrer" role="menuitem">NFL Coach Continuity</a>
-        <a href="https://rmallorybpc.github.io/nhl-reunion/" target="_blank" rel="noreferrer" role="menuitem">NHL Reunion</a>
-        <a href="https://rmallorybpc.github.io/nhl-play-for-contract/" target="_blank" rel="noreferrer" role="menuitem">NHL Play for Contract</a>
-        <a href="https://rmallorybpc.github.io/nhl-free-agency-research/welcome.html" target="_blank" rel="noreferrer" role="menuitem">NHL Free Agency Research</a>
-        <a href="https://rmallorybpc.github.io/nba-research-project/" target="_blank" rel="noreferrer" role="menuitem">NBA Supermax Research</a>
+      <div class="tmg-nav-center">
+        <div class="tmg-navlinks">
+          <a href="index.html" class="tmg-navlink">Findings</a
+          ><a href="methods.html" class="tmg-navlink active" aria-current="page"
+            >Methods</a
+          ><a href="audit.html" class="tmg-navlink">Audit</a>
+        </div>
       </div>
-      <div role="group" aria-label="Sports Tools">
-        <p class="tmg-dd-group">Sports Tools</p>
-        <a href="https://rmallorybpc.github.io/nflanalysis/dashboard/src/findings.html?season=2022&amp;team_id=PHI" target="_blank" rel="noreferrer" role="menuitem">NFL Team Findings Dashboard</a>
-        <a href="https://rmallorybpc.github.io/nfl-environment-reprojection/" target="_blank" rel="noreferrer" role="menuitem">NFL Environment Reprojection</a>
+      <div class="tmg-dropdown-wrap">
+        <button
+          class="tmg-dropdown-btn"
+          id="tmgDdBtn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="tmgDdMenu"
+        >
+          TMG Tool Suite
+          <svg
+            class="tmg-chevron"
+            viewBox="0 0 12 12"
+            fill="none"
+            width="12"
+            height="12"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 4l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+        <div class="tmg-dropdown-menu" id="tmgDdMenu" role="menu">
+          <div role="group" aria-label="Research and Systems">
+            <p class="tmg-dd-group">Research and Systems</p>
+            <a
+              href="https://rmallorybpc.github.io/federal-ai-spend-audit/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Federal AI Spend Audit</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/pdf-multi-agent-analysis/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >PDF Multi-Agent Analysis</a
+            >
+            <a
+              href="https://content-integrity-audit.pages.dev/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Content Integrity</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/colorado-snowpack-enso/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Colorado ENSO Explorer</a
+            >
+          </div>
+          <div role="group" aria-label="Talent Research">
+            <p class="tmg-dd-group">Talent Research</p>
+            <a
+              href="https://rmallorybpc.github.io/talent-portability-research/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Talent Portability Research</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/external-hire-premium/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >External Hire Premium</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nfl-coach-continuity/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Coach Continuity</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-reunion/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Reunion</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-play-for-contract/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Play for Contract</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nhl-free-agency-research/welcome.html"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NHL Free Agency Research</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nba-research-project/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NBA Supermax Research</a
+            >
+          </div>
+          <div role="group" aria-label="Sports Tools">
+            <p class="tmg-dd-group">Sports Tools</p>
+            <a
+              href="https://rmallorybpc.github.io/nflanalysis/dashboard/src/findings.html?season=2022&amp;team_id=PHI"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Team Findings Dashboard</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/nfl-environment-reprojection/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >NFL Environment Reprojection</a
+            >
+          </div>
+          <div role="group" aria-label="Personal">
+            <p class="tmg-dd-group">Personal</p>
+            <a
+              href="https://rmallorybpc.github.io/recipes/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Family Recipes and Grocery List</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/housing-market-intel/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Housing Market Intel</a
+            >
+            <a
+              href="https://rmallorybpc.github.io/real-estate-report/"
+              target="_blank"
+              rel="noreferrer"
+              role="menuitem"
+              >Real Estate Report</a
+            >
+          </div>
+        </div>
       </div>
-      <div role="group" aria-label="Personal">
-        <p class="tmg-dd-group">Personal</p>
-        <a href="https://rmallorybpc.github.io/recipes/" target="_blank" rel="noreferrer" role="menuitem">Family Recipes and Grocery List</a>
-        <a href="https://rmallorybpc.github.io/housing-market-intel/" target="_blank" rel="noreferrer" role="menuitem">Housing Market Intel</a>
-        <a href="https://rmallorybpc.github.io/real-estate-report/" target="_blank" rel="noreferrer" role="menuitem">Real Estate Report</a>
+    </nav>
+    <div class="tmg-page tmg-container">
+      <div class="tmg-page-header">
+        <p class="tmg-eyebrow">
+          Methods &middot; Identification, matching and limits
+        </p>
+        <h1 class="tmg-page-title">
+          How 43 converts were identified and matched
+        </h1>
+        <p class="tmg-page-desc">
+          The data source this study needed was taken offline in 2024. This is
+          how the population was rebuilt, and what went wrong along the way.
+        </p>
+      </div>
+
+      <div class="tmg-bento-grid">
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">The problem</p>
+          <h2 class="tmg-h2">The source this study needed no longer exists</h2>
+          <p>
+            CapFriendly maintained the complete public database of NHL
+            professional tryouts. It was bought by the Washington Capitals and
+            taken offline in July 2024. Nothing replaced it retroactively.
+          </p>
+          <p>
+            What survives is fragmentary. Annual news trackers are either frozen
+            mid-camp or curated to notable players. One of the best-structured
+            historical trackers is now a parked domain for sale. NHL.com
+            publishes a tryout page each season but overwrites it at the same
+            URL. PuckPedia, the live successor, carries trackers only from 2025.
+          </p>
+          <p>
+            A single-source tryout list is not usable. Reconciling several still
+            cannot prove completeness. So the study could not start from tryout
+            lists at all.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">Identification, step one</p>
+          <h2 class="tmg-h2">Contract timing as a signature</h2>
+          <p>
+            A player cannot appear in an NHL game without a contract on file. A
+            tryout player arrives with none and must sign before he can play. So
+            every convert has a signing date inside the camp window, and the
+            population can be generated from contract data rather than tryout
+            lists.
+          </p>
+          <p>
+            Filtering PuckPedia's contract records to standard-level deals
+            signed by unrestricted free agents between camp opening and the
+            club's opening night produces the candidate set. Restricted free
+            agent signings drop out on signing status, which removes contract
+            holdouts. Entry-level deals drop out on contract level, which
+            removes teenage prospects.
+          </p>
+          <h3>Why the window is team-relative</h3>
+          <p>
+            Opening night varies by club, sometimes by more than a week. In
+            2022-23 two teams opened in Prague on October 7 while others started
+            October 15. A single league-wide cutoff misclassifies players at the
+            edges in both directions, so every candidate is measured against its
+            own club's opener.
+          </p>
+          <h3>Where the window came from</h3>
+          <p>
+            Plotting standard free agent signings by date shows the same shape
+            in every season: dense activity through July and August, a trough of
+            two to three weeks, then a cluster resuming at camp. The trough
+            appeared in five consecutive seasons independently, so the window
+            boundary is observed rather than assumed.
+          </p>
+          <p>
+            An earlier version of this study set the window at twelve days
+            before the opener. That was too tight and missed two verified
+            converts who signed within a week of camp opening. The window was
+            widened to camp opening, which is why verification does more work at
+            the early edge.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">Identification, step two</p>
+          <h2 class="tmg-h2">
+            Verification is part of identification, not cleanup
+          </h2>
+          <p>
+            Contract timing generates candidates. It cannot identify converts,
+            because two distinct things produce the same date pattern.
+          </p>
+          <h3>Paperwork timing</h3>
+          <p>
+            The signing date in contract databases is the central registry
+            filing date, not the date terms were agreed. In 2021 the Islanders
+            announced Zdeno Chara on September 18 and Zach Parise earlier still,
+            yet both records show October 10, because the club filed both on the
+            roster deadline. Contemporary coverage describes this as that
+            general manager's standard practice.
+          </p>
+          <p>
+            Any club that files late produces candidates that look like
+            conversions and are not. The distortion is invisible in the data.
+          </p>
+          <h3>Eve-of-camp signings</h3>
+          <p>
+            Players who agree to terms as camp opens sit on the same dates as
+            genuine early conversions. Four candidates in this set turned out to
+            be re-signings or straight free agent deals announced within days of
+            camp opening.
+          </p>
+          <p>
+            Of the six candidates signing within days of camp opening across all
+            seasons, two were genuine converts and four were not. The early edge
+            of the window is where the method is weakest, and only a tryout
+            source separates them.
+          </p>
+          <h3>Sources used</h3>
+          <p>
+            HFBoards annual training-camp threads record tryouts with their
+            outcomes and were the most useful source found. NHL.com publishes an
+            annual tryout page curated to notable players. Pro Hockey Rumors and
+            Daily Faceoff run trackers of varying quality year to year. Every
+            convert in the final set carries its source in the dataset.
+          </p>
+          <p>
+            Of 57 candidates, 54 were confirmed as tryouts with the signing
+            club, seven were confirmed as something else and removed, and three
+            could not be resolved either way.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">The roster test</p>
+          <h2 class="tmg-h2">Ten games, and why not five</h2>
+          <p>
+            The intended definition was the opening-night active roster. The NHL
+            API does not serve historical active rosters, so a proxy was needed.
+          </p>
+          <p>
+            The first version used the club's first five games. That excluded
+            three verified converts who were healthy scratches in October,
+            including one who went on to score 22 goals that season. All three
+            were two or three days past the cutoff.
+          </p>
+          <p>
+            Ten games recovers all three and still excludes every minor-league
+            assignment in the set. The four clearest exclusions hold at either
+            threshold: their first appearances came in November, January and
+            February.
+          </p>
+          <p class="note">
+            This threshold was chosen after a first pass showed five was too
+            tight. It is not a natural break in the data. A first look suggested
+            a clean discontinuity at five games; widening to ten produced new
+            marginal cases at the new boundary, which means the apparent gap was
+            a property of where the line sat rather than structure in the data.
+          </p>
+          <p>
+            Survival at the one-year mark uses the same ten-game rule, so both
+            ends of the study are measured identically.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">The comparator</p>
+          <h2 class="tmg-h2">
+            Matching, and the specification that was wrong first
+          </h2>
+          <p>
+            Each convert is matched to three players who appeared in a club's
+            first ten games that same season without a tryout, on position group
+            exactly, age within two years, and prior-season NHL games played
+            within fifteen.
+          </p>
+          <h3>The first specification produced a fake result</h3>
+          <p>
+            The original matching used position and age, with games played as a
+            tiebreaker. It returned a differential of 47 points.
+          </p>
+          <p>
+            That number was an artifact. The comparators had a median of 82
+            games played and a minimum of 51 &mdash; every one a full-time
+            regular. Two errors caused it. The tiebreaker sorted descending, so
+            it selected the highest-games-played player available at each age.
+            And the variable was games played <em>during</em> the season being
+            matched, which is an outcome rather than a covariate: it selected
+            players who went on to play a full season, then found that they
+            survived.
+          </p>
+          <p>
+            The corrected specification uses the season <em>before</em>, as a
+            constraint rather than a tiebreaker. Converts average 41.0
+            prior-season games, comparators 41.4, medians 46 and 46. Both groups
+            are part-time NHLers from the previous year, which is the comparison
+            the design called for.
+          </p>
+          <h3>Why age alone is not enough</h3>
+          <p>
+            At the ages these players cluster at, most others in the league are
+            there because they are good. Matching on age without controlling for
+            playing time compares marginal players to the league average, and a
+            large gap between those groups is close to tautological.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">Sensitivity</p>
+          <h2 class="tmg-h2">The result across nine specifications</h2>
+          <div class="scroll">
+            <table class="tmg-table">
+              <thead>
+                <tr>
+                  <th scope="col">Comparators each</th>
+                  <th scope="col">Age window</th>
+                  <th scope="col">Games window</th>
+                  <th scope="col">Converts</th>
+                  <th scope="col">Comparators</th>
+                  <th scope="col">Differential</th>
+                  <th scope="col">95% CI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>15</td>
+                  <td>48.8%</td>
+                  <td>68.8%</td>
+                  <td>&minus;19.9</td>
+                  <td>&minus;36.9 to &minus;3.0</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>2</td>
+                  <td>15</td>
+                  <td>48.8%</td>
+                  <td>69.8%</td>
+                  <td>&minus;20.9</td>
+                  <td>&minus;38.7 to &minus;3.1</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>2</td>
+                  <td>15</td>
+                  <td>48.8%</td>
+                  <td>69.2%</td>
+                  <td>&minus;20.4</td>
+                  <td>&minus;36.6 to &minus;4.2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>15</td>
+                  <td>48.8%</td>
+                  <td>69.4%</td>
+                  <td>&minus;20.5</td>
+                  <td>&minus;37.5 to &minus;3.5</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>15</td>
+                  <td>48.8%</td>
+                  <td>69.8%</td>
+                  <td>&minus;20.9</td>
+                  <td>&minus;37.8 to &minus;4.0</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>10</td>
+                  <td>48.8%</td>
+                  <td>69.0%</td>
+                  <td>&minus;20.2</td>
+                  <td>&minus;37.2 to &minus;3.2</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>2</td>
+                  <td>25</td>
+                  <td>48.8%</td>
+                  <td>68.2%</td>
+                  <td>&minus;19.4</td>
+                  <td>&minus;36.3 to &minus;2.4</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>1</td>
+                  <td>10</td>
+                  <td>51.2%</td>
+                  <td>69.7%</td>
+                  <td>&minus;18.5</td>
+                  <td>&minus;35.9 to &minus;1.1</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>3</td>
+                  <td>25</td>
+                  <td>48.8%</td>
+                  <td>68.4%</td>
+                  <td>&minus;19.5</td>
+                  <td>&minus;35.7 to &minus;3.4</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin-top: 14px">
+            The differential ranges from 18.5 to 20.9 points. No specification
+            crosses zero. The tightest match, age within one year and games
+            played within ten, gives the weakest result with an upper bound of
+            1.1 points.
+          </p>
+          <p>
+            Publishing a null was decided in advance, before any outcome was
+            resolved. It did not turn out to be a null, but the decision was
+            made either way.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">Season notes</p>
+          <h2 class="tmg-h2">2020-21 is not like the others</h2>
+          <p>
+            That season opened in January 2021. Camps opened December 31 for the
+            seven clubs that had not participated in the previous summer's
+            return to play, and January 3 for the rest. There was a training
+            camp. There were no preseason games.
+          </p>
+          <p>
+            Since a tryout permits camp and exhibition play only, conversions
+            that season happened on practice sessions alone, with no games to
+            showcase in. That is a difference in kind, not degree.
+          </p>
+          <p>
+            The contract signature also fails there. Free agency ran late into
+            camp, so no trough exists and normal signings cannot be separated
+            from conversions by date. That cohort was hand-assembled from the
+            NHL.com tryout list, which records fifteen tryouts and their
+            outcomes. Being curated to notable players, its completeness is
+            lower than the others.
+          </p>
+          <h3>Taxi squads</h3>
+          <p>
+            Four to six player taxi squads existed only in that season. An
+            earlier version counted taxi squad assignment as making the roster.
+            That was reversed once the run showed it admitted five of nine
+            converts in that cohort on a standard no other cohort faced, which
+            would have inflated the count and depressed the survival rate for
+            structural reasons.
+          </p>
+        </div>
+
+        <div class="tmg-card-wide prose">
+          <p class="tmg-card-label">Limits</p>
+          <h2 class="tmg-h2">What this study cannot tell you</h2>
+          <ul>
+            <li>
+              <strong
+                >Camp opening dates are sourced for two seasons of
+                seven.</strong
+              >
+              The rest are estimates, and they determine which candidates enter
+              the set. This is the largest unverified input.
+            </li>
+            <li>
+              <strong>Completeness cannot be proven.</strong> Several annual
+              tryout lists cover notable players only, so an unlisted tryout
+              cannot be ruled out in any season.
+            </li>
+            <li>
+              <strong>Signing dates are filing dates.</strong> Verification
+              catches the cases it can reach; it cannot catch a club that filed
+              late and was never written about.
+            </li>
+            <li>
+              <strong>Three candidates are unresolved.</strong> Two carry into
+              the analysis with their tryout status unknown.
+            </li>
+            <li>
+              <strong
+                >Signing club was derived from the signing general manager
+                field.</strong
+              >
+              That is a proxy and it broke once, when a general manager changed
+              clubs mid-study. Affected rows were corrected and are flagged in
+              the dataset.
+            </li>
+            <li>
+              <strong>Cohort-level rates are not findings.</strong> Cohorts run
+              from two to ten players. The spread between seasons is noise.
+            </li>
+            <li>
+              <strong>The sample does not support more than this.</strong> A
+              regression with covariates and multi-year survival curves were
+              both planned and both dropped. With 43 converts neither would be
+              interpretable.
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</nav>
-<div class="tmg-page tmg-container">
-  <div class="tmg-page-header">
-    <p class="tmg-eyebrow">Methods &middot; Identification, matching and limits</p>
-    <h1 class="tmg-page-title">How 43 converts were identified and matched</h1>
-    <p class="tmg-page-desc">The data source this study needed was taken offline in 2024. This is how the population was rebuilt, and what went wrong along the way.</p>
-  </div>
-
-  <div class="tmg-bento-grid">
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">The problem</p>
-      <h2 class="tmg-h2">The source this study needed no longer exists</h2>
-      <p>CapFriendly maintained the complete public database of NHL professional tryouts.
-      It was bought by the Washington Capitals and taken offline in July 2024. Nothing
-      replaced it retroactively.</p>
-      <p>What survives is fragmentary. Annual news trackers are either frozen mid-camp or
-      curated to notable players. One of the best-structured historical trackers is now a
-      parked domain for sale. NHL.com publishes a tryout page each season but overwrites it
-      at the same URL. PuckPedia, the live successor, carries trackers only from 2025.</p>
-      <p>A single-source tryout list is not usable. Reconciling several still cannot prove
-      completeness. So the study could not start from tryout lists at all.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">Identification, step one</p>
-      <h2 class="tmg-h2">Contract timing as a signature</h2>
-      <p>A player cannot appear in an NHL game without a contract on file. A tryout player
-      arrives with none and must sign before he can play. So every convert has a signing
-      date inside the camp window, and the population can be generated from contract data
-      rather than tryout lists.</p>
-      <p>Filtering PuckPedia's contract records to standard-level deals signed by unrestricted
-      free agents between camp opening and the club's opening night produces the candidate
-      set. Restricted free agent signings drop out on signing status, which removes contract
-      holdouts. Entry-level deals drop out on contract level, which removes teenage prospects.</p>
-      <h3>Why the window is team-relative</h3>
-      <p>Opening night varies by club, sometimes by more than a week. In 2022-23 two teams
-      opened in Prague on October 7 while others started October 15. A single league-wide
-      cutoff misclassifies players at the edges in both directions, so every candidate is
-      measured against its own club's opener.</p>
-      <h3>Where the window came from</h3>
-      <p>Plotting standard free agent signings by date shows the same shape in every season:
-      dense activity through July and August, a trough of two to four weeks, then a cluster
-      resuming at camp. The trough appears in every season where the method applies and is documented
-      explicitly in four of them, so the window boundary is observed rather than assumed. It is
-      absent in 2020-21, for reasons covered below.</p>
-      <p>An earlier version of this study set the window at twelve days before the opener.
-      That was too tight and missed two verified converts who signed within a week of camp
-      opening. The window was widened to camp opening, which is why verification does more
-      work at the early edge.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">Identification, step two</p>
-      <h2 class="tmg-h2">Verification is part of identification, not cleanup</h2>
-      <p>Contract timing generates candidates. It cannot identify converts, because two
-      distinct things produce the same date pattern.</p>
-      <h3>Paperwork timing</h3>
-      <p>The signing date in contract databases is the central registry filing date, not the
-      date terms were agreed. In 2021 the Islanders announced Zdeno Chara on September 18 and
-      Zach Parise earlier still, yet both records show October 10, because the club filed both
-      on the roster deadline. Contemporary coverage describes this as that general manager's
-      standard practice.</p>
-      <p>Any club that files late produces candidates that look like conversions and are not.
-      The distortion is invisible in the data.</p>
-      <h3>Eve-of-camp signings</h3>
-      <p>Players who agree to terms as camp opens sit on the same dates as genuine early
-      conversions. Four candidates in this set turned out to be re-signings or straight free
-      agent deals announced within days of camp opening.</p>
-      <p>Of the six candidates signing within days of camp opening across all seasons, two
-      were genuine converts and four were not. The early edge of the window is where the
-      method is weakest, and only a tryout source separates them.</p>
-      <h3>Sources used</h3>
-      <p>HFBoards annual training-camp threads record tryouts with their outcomes and were the
-      most useful source found. NHL.com publishes an annual tryout page curated to notable
-      players. Pro Hockey Rumors and Daily Faceoff run trackers of varying quality year to
-      year. Every convert in the final set carries its source in the dataset.</p>
-      <p>Of 64 candidates, 54 were confirmed as tryouts with the signing club, seven were
-      confirmed as something else and removed, and three could not be resolved either way,
-      leaving 57 in the analysis. Two of those three unresolved cases carry into the final set,
-      so 43 is a lower bound rather than a count.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">The roster test</p>
-      <h2 class="tmg-h2">Ten games, and why not five</h2>
-      <p>The intended definition was the opening-night active roster. The NHL API does not
-      serve historical active rosters, so a proxy was needed.</p>
-      <p>The first version used the club's first five games. That excluded three verified
-      converts who were healthy scratches in October, including one who went on to score 22
-      goals that season. All three were two or three days past the cutoff.</p>
-      <p>Ten games recovers all three and still excludes every minor-league assignment in the
-      set. The four clearest exclusions hold at either threshold: their first appearances came
-      in November, January and February.</p>
-      <p class="note">This threshold was chosen after a first pass showed five was too tight.
-      It is not a natural break in the data. A first look suggested a clean discontinuity at
-      five games; widening to ten produced new marginal cases at the new boundary, which means
-      the apparent gap was a property of where the line sat rather than structure in the data.</p>
-      <p>Survival at the one-year mark uses the same ten-game rule, so both ends of the study
-      are measured identically.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">The comparator</p>
-      <h2 class="tmg-h2">Matching, and the specification that was wrong first</h2>
-      <p>Each convert is matched to three players who appeared in a club's first ten games
-      that same season without a tryout, on position group exactly, age within two years, and
-      prior-season NHL games played within fifteen.</p>
-      <h3>The first specification produced a fake result</h3>
-      <p>The original matching used position and age, with games played as a tiebreaker. It
-      returned a differential of 47 points.</p>
-      <p>That number was an artifact. The comparators had a median of 82 games played and a
-      minimum of 51 &mdash; every one a full-time regular. Two errors caused it. The tiebreaker
-      sorted descending, so it selected the highest-games-played player available at each age.
-      And the variable was games played <em>during</em> the season being matched, which is an
-      outcome rather than a covariate: it selected players who went on to play a full season,
-      then found that they survived.</p>
-      <p>The corrected specification uses the season <em>before</em>, as a constraint rather
-      than a tiebreaker. Converts average 41.0 prior-season games, comparators 41.4, medians
-      46 and 46. Both groups are part-time NHLers from the previous year, which is the
-      comparison the design called for.</p>
-      <h3>Why age alone is not enough</h3>
-      <p>At the ages these players cluster at, most others in the league are there because
-      they are good. Matching on age without controlling for playing time compares marginal
-      players to the league average, and a large gap between those groups is close to
-      tautological.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">Sensitivity</p>
-      <h2 class="tmg-h2">The result across nine specifications</h2>
-      <div class="scroll">
-      <table class="tmg-table">
-        <thead>
-          <tr>
-            <th scope="col">Comparators each</th>
-            <th scope="col">Age window</th>
-            <th scope="col">Games window</th>
-            <th scope="col">Converts</th>
-            <th scope="col">Comparators</th>
-            <th scope="col">Differential</th>
-            <th scope="col">95% CI</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>3</td><td>2</td><td>15</td><td>48.8%</td><td>68.8%</td><td>&minus;19.9</td><td>&minus;36.9 to &minus;3.0</td></tr>
-          <tr><td>2</td><td>2</td><td>15</td><td>48.8%</td><td>69.8%</td><td>&minus;20.9</td><td>&minus;38.7 to &minus;3.1</td></tr>
-          <tr><td>5</td><td>2</td><td>15</td><td>48.8%</td><td>69.2%</td><td>&minus;20.4</td><td>&minus;36.6 to &minus;4.2</td></tr>
-          <tr><td>3</td><td>1</td><td>15</td><td>48.8%</td><td>69.4%</td><td>&minus;20.5</td><td>&minus;37.5 to &minus;3.5</td></tr>
-          <tr><td>3</td><td>3</td><td>15</td><td>48.8%</td><td>69.8%</td><td>&minus;20.9</td><td>&minus;37.8 to &minus;4.0</td></tr>
-          <tr><td>3</td><td>2</td><td>10</td><td>48.8%</td><td>69.0%</td><td>&minus;20.2</td><td>&minus;37.2 to &minus;3.2</td></tr>
-          <tr><td>3</td><td>2</td><td>25</td><td>48.8%</td><td>68.2%</td><td>&minus;19.4</td><td>&minus;36.3 to &minus;2.4</td></tr>
-          <tr><td>3</td><td>1</td><td>10</td><td>51.2%</td><td>69.7%</td><td>&minus;18.5</td><td>&minus;35.9 to &minus;1.1</td></tr>
-          <tr><td>5</td><td>3</td><td>25</td><td>48.8%</td><td>68.4%</td><td>&minus;19.5</td><td>&minus;35.7 to &minus;3.4</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <p style="margin-top:14px">The differential ranges from 18.5 to 20.9 points. No
-      specification crosses zero. The tightest match, age within one year and games played
-      within ten, gives the weakest result with an upper bound of 1.1 points.</p>
-      <p>Publishing a null was decided in advance, before any outcome was resolved. It did not
-      turn out to be a null, but the decision was made either way.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">Season notes</p>
-      <h2 class="tmg-h2">2020-21 is not like the others</h2>
-      <p>That season opened in January 2021. Camps opened December 31 for the seven clubs that
-      had not participated in the previous summer's return to play, and January 3 for the rest.
-      There was a training camp. There were no preseason games.</p>
-      <p>Since a tryout permits camp and exhibition play only, conversions that season happened
-      on practice sessions alone, with no games to showcase in. That is a difference in kind,
-      not degree.</p>
-      <p>The contract signature also fails there. Free agency ran late into camp, so no trough
-      exists and normal signings cannot be separated from conversions by date. That cohort was
-      hand-assembled from the NHL.com tryout list, which records fifteen tryouts and their
-      outcomes. Being curated to notable players, its completeness is lower than the others.</p>
-      <h3>Taxi squads</h3>
-      <p>Four to six player taxi squads existed only in that season. An earlier version counted
-      taxi squad assignment as making the roster. That was reversed once the run showed it
-      admitted five of nine converts in that cohort on a standard no other cohort faced, which
-      would have inflated the count and depressed the survival rate for structural reasons.</p>
-    </div>
-
-    <div class="tmg-card-wide prose">
-      <p class="tmg-card-label">Limits</p>
-      <h2 class="tmg-h2">What this study cannot tell you</h2>
-      <ul>
-        <li><strong>Camp opening dates are sourced for two seasons of seven.</strong> The rest
-        are estimates, and they determine which candidates enter the set. This is the largest
-        unverified input.</li>
-        <li><strong>Completeness cannot be proven.</strong> Several annual tryout lists cover
-        notable players only, so an unlisted tryout cannot be ruled out in any season.</li>
-        <li><strong>Signing dates are filing dates.</strong> Verification catches the cases it
-        can reach; it cannot catch a club that filed late and was never written about.</li>
-        <li><strong>Three candidates are unresolved.</strong> Two carry into the analysis with
-        their tryout status unknown.</li>
-        <li><strong>Signing club was derived from the signing general manager field.</strong>
-        That is a proxy and it broke once, when a general manager changed clubs mid-study.
-        Affected rows were corrected and are flagged in the dataset.</li>
-        <li><strong>Cohort-level rates are not findings.</strong> Cohorts run from two to ten
-        players. The spread between seasons is noise.</li>
-        <li><strong>The sample does not support more than this.</strong> A regression with
-        covariates and multi-year survival curves were both planned and both dropped. With 43
-        converts neither would be interpretable.</li>
-      </ul>
-    </div>
-
-  </div>
-
-</div>
-<footer class="tmg-footer">The Mallory Group &middot; NHL PTO convert survival study &middot; Data through the 2024-25 season</footer>
-<script>
-(function(){
-  var b=document.getElementById('tmgDdBtn'), m=document.getElementById('tmgDdMenu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(e){
-    e.stopPropagation();
-    var open=m.classList.toggle('open');
-    b.classList.toggle('open',open);
-    b.setAttribute('aria-expanded',open?'true':'false');
-  });
-  document.addEventListener('click',function(){
-    m.classList.remove('open'); b.classList.remove('open');
-    b.setAttribute('aria-expanded','false');
-  });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){ m.classList.remove('open'); b.classList.remove('open');
-      b.setAttribute('aria-expanded','false'); b.focus(); }
-  });
-})();
-</script>
-</body>
+    <footer class="tmg-footer">
+      The Mallory Group &middot; NHL PTO convert survival study &middot; Data
+      through the 2024-25 season
+    </footer>
+    <script>
+      (function () {
+        var b = document.getElementById("tmgDdBtn"),
+          m = document.getElementById("tmgDdMenu");
+        if (!b || !m) return;
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          var open = m.classList.toggle("open");
+          b.classList.toggle("open", open);
+          b.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        document.addEventListener("click", function () {
+          m.classList.remove("open");
+          b.classList.remove("open");
+          b.setAttribute("aria-expanded", "false");
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") {
+            m.classList.remove("open");
+            b.classList.remove("open");
+            b.setAttribute("aria-expanded", "false");
+            b.focus();
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
