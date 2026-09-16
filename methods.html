@@ -6,7 +6,7 @@
 <title>Methods | NHL PTO Convert Survival</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
+<link rel="stylesheet" href="tmg.css">
 <style>
     .tmg-nav-left { display:flex; align-items:center; gap:20px; }
     .tmg-navlinks { display:flex; gap:4px; }
@@ -18,6 +18,7 @@
       text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
     .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
     .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
+    .tmg-dropdown-wrap { justify-self:end; }
     .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
     .prose li { margin-bottom:6px; }
     .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
@@ -42,6 +43,8 @@
     <div class="tmg-logo" aria-label="The Mallory Group">
       <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
     </div>
+  </div>
+  <div class="tmg-nav-center">
     <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink">Findings</a><a href="methods.html" class="tmg-navlink active" aria-current="page">Methods</a><a href="audit.html" class="tmg-navlink">Audit</a></div>
   </div>
   <div class="tmg-dropdown-wrap">
@@ -125,9 +128,10 @@
       measured against its own club's opener.</p>
       <h3>Where the window came from</h3>
       <p>Plotting standard free agent signings by date shows the same shape in every season:
-      dense activity through July and August, a trough of two to three weeks, then a cluster
-      resuming at camp. The trough appeared in five consecutive seasons independently, so the
-      window boundary is observed rather than assumed.</p>
+      dense activity through July and August, a trough of two to four weeks, then a cluster
+      resuming at camp. The trough appears in every season where the method applies and is documented
+      explicitly in four of them, so the window boundary is observed rather than assumed. It is
+      absent in 2020-21, for reasons covered below.</p>
       <p>An earlier version of this study set the window at twelve days before the opener.
       That was too tight and missed two verified converts who signed within a week of camp
       opening. The window was widened to camp opening, which is why verification does more
@@ -159,8 +163,10 @@
       most useful source found. NHL.com publishes an annual tryout page curated to notable
       players. Pro Hockey Rumors and Daily Faceoff run trackers of varying quality year to
       year. Every convert in the final set carries its source in the dataset.</p>
-      <p>Of 57 candidates, 54 were confirmed as tryouts with the signing club, seven were
-      confirmed as something else and removed, and three could not be resolved either way.</p>
+      <p>Of 64 candidates, 54 were confirmed as tryouts with the signing club, seven were
+      confirmed as something else and removed, and three could not be resolved either way,
+      leaving 57 in the analysis. Two of those three unresolved cases carry into the final set,
+      so 43 is a lower bound rather than a count.</p>
     </div>
 
     <div class="tmg-card-wide prose">
@@ -293,22 +299,31 @@
 </div>
 <footer class="tmg-footer">The Mallory Group &middot; NHL PTO convert survival study &middot; Data through the 2024-25 season</footer>
 <script>
-(function(){
-  var b=document.getElementById('tmgDdBtn'), m=document.getElementById('tmgDdMenu');
-  if(!b||!m) return;
-  b.addEventListener('click',function(e){
+(function () {
+  const btn  = document.getElementById('tmgDdBtn');
+  const menu = document.getElementById('tmgDdMenu');
+  if (!btn || !menu) return;
+
+  btn.addEventListener('click', function (e) {
     e.stopPropagation();
-    var open=m.classList.toggle('open');
-    b.classList.toggle('open',open);
-    b.setAttribute('aria-expanded',open?'true':'false');
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
   });
-  document.addEventListener('click',function(){
-    m.classList.remove('open'); b.classList.remove('open');
-    b.setAttribute('aria-expanded','false');
+
+  document.addEventListener('click', function () {
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
   });
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'){ m.classList.remove('open'); b.classList.remove('open');
-      b.setAttribute('aria-expanded','false'); b.focus(); }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.focus();
+    }
   });
 })();
 </script>

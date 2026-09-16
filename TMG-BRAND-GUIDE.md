@@ -292,7 +292,7 @@ The nav appears on every page. Sticky, white background, fixed height of `56px`.
   position: sticky; top: 0; z-index: 100;
   background: var(--tmg-white); border-bottom: var(--tmg-border);
   padding: 0 24px; height: 56px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
 }
 .tmg-logo {
   display: flex; align-items: center;
@@ -303,7 +303,8 @@ The nav appears on every page. Sticky, white background, fixed height of `56px`.
   width: 2px; height: 20px;
   background: var(--tmg-sage); border-radius: 2px; margin: 0 1px;
 }
-.tmg-dropdown-wrap { position: relative; }
+.tmg-dropdown-wrap { position: relative; justify-self: end; }
+.tmg-nav > .tmg-dropdown-wrap:last-child { grid-column: 3; }
 .tmg-dropdown-btn {
   background: transparent; border: 1px solid rgba(45,52,54,0.20);
   border-radius: var(--tmg-btn-radius); padding: 7px 14px;
