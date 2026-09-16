@@ -1,0 +1,18 @@
+Sensitivity to unresolved tryout status
+
+Ben Hutton (2019-20 LAK) and Max McCormick (2021-22 SEA) are counted as
+converts but neither has been confirmed on a tryout by any source found.
+This shows what the result looks like without them.
+
+specification               n          converts   comparators  diff    95% CI
+--------------------------------------------------------------------------------------------
+as published               43 converts   48.8%  vs  68.8%   -19.9  ( -36.9 to   -3.0)  
+both excluded              41 converts   48.8%  vs  68.9%   -20.1  ( -37.4 to   -2.7)  
+without Ben Hutton         42 converts   47.6%  vs  68.0%   -20.4  ( -37.6 to   -3.2)  
+without Max McCormick      42 converts   50.0%  vs  69.6%   -19.6  ( -36.7 to   -2.5)  
+--------------------------------------------------------------------------------------------
+
+differential range: -20.4 to -19.6 points
+no specification crosses zero
+
+The finding does not rest on either unresolved player.
