@@ -6,7 +6,7 @@
 <title>Methods | NHL PTO Convert Survival</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tmg.css">
+<link rel="stylesheet" href="https://rmallorybpc.github.io/tmg-brand-guide/dist/tmg.css">
 <style>
     .tmg-nav-left { display:flex; align-items:center; gap:20px; }
     .tmg-navlinks { display:flex; gap:4px; }
@@ -18,7 +18,6 @@
       text-transform:uppercase; color:rgba(45,52,54,0.42); margin:10px 12px 4px; }
     .tmg-dropdown-menu > div:first-child .tmg-dd-group { margin-top:4px; }
     .tmg-dropdown-menu { min-width:270px; max-height:70vh; overflow-y:auto; }
-    .tmg-dropdown-wrap { justify-self:end; }
     .prose p { margin:0 0 14px; } .prose ul { margin:0 0 14px; padding-left:20px; }
     .prose li { margin-bottom:6px; }
     .prose h3 { font-size:16px; font-weight:500; margin:22px 0 8px; }
@@ -43,8 +42,6 @@
     <div class="tmg-logo" aria-label="The Mallory Group">
       <span>TM</span><div class="tmg-logo-divider" aria-hidden="true"></div><span>G</span>
     </div>
-  </div>
-  <div class="tmg-nav-center">
     <div class="tmg-navlinks"><a href="index.html" class="tmg-navlink">Findings</a><a href="methods.html" class="tmg-navlink active" aria-current="page">Methods</a><a href="audit.html" class="tmg-navlink">Audit</a></div>
   </div>
   <div class="tmg-dropdown-wrap">
@@ -248,6 +245,37 @@
       within ten, gives the weakest result with an upper bound of 1.1 points.</p>
       <p>Publishing a null was decided in advance, before any outcome was resolved. It did not
       turn out to be a null, but the decision was made either way.</p>
+      <h3>Sensitivity to the two unresolved converts</h3>
+      <p>Two converts are counted whose tryout status no source confirms: Ben Hutton with Los
+      Angeles in 2019-20 and Max McCormick with Seattle in 2021-22. Both are retained, and this
+      is what the result looks like without them.</p>
+      <div class="scroll">
+      <table class="tmg-table">
+        <thead>
+          <tr>
+            <th scope="col">Specification</th>
+            <th scope="col">Converts</th>
+            <th scope="col">Convert survival</th>
+            <th scope="col">Comparator survival</th>
+            <th scope="col">Differential</th>
+            <th scope="col">95% CI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>As published</td><td>43</td><td>48.8%</td><td>68.8%</td><td>&minus;19.9</td><td>&minus;36.9 to &minus;3.0</td></tr>
+          <tr><td>Both excluded</td><td>41</td><td>48.8%</td><td>68.9%</td><td>&minus;20.1</td><td>&minus;37.4 to &minus;2.7</td></tr>
+          <tr><td>Without Hutton</td><td>42</td><td>47.6%</td><td>68.0%</td><td>&minus;20.4</td><td>&minus;37.6 to &minus;3.2</td></tr>
+          <tr><td>Without McCormick</td><td>42</td><td>50.0%</td><td>69.6%</td><td>&minus;19.6</td><td>&minus;36.7 to &minus;2.5</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:14px">The differential moves between 19.6 and 20.4 points and no
+      version crosses zero. The two pull in opposite directions and roughly cancel, so excluding
+      both leaves the result marginally stronger than publishing it with them. The finding does
+      not rest on either player.</p>
+      <p>This is the first test that varies who counts as a convert rather than how comparators
+      are matched. It covers two rows of 43, so it addresses the population question at the
+      margin rather than answering it.</p>
     </div>
 
     <div class="tmg-card-wide prose">
@@ -299,31 +327,22 @@
 </div>
 <footer class="tmg-footer">The Mallory Group &middot; NHL PTO convert survival study &middot; Data through the 2024-25 season</footer>
 <script>
-(function () {
-  const btn  = document.getElementById('tmgDdBtn');
-  const menu = document.getElementById('tmgDdMenu');
-  if (!btn || !menu) return;
-
-  btn.addEventListener('click', function (e) {
+(function(){
+  var b=document.getElementById('tmgDdBtn'), m=document.getElementById('tmgDdMenu');
+  if(!b||!m) return;
+  b.addEventListener('click',function(e){
     e.stopPropagation();
-    const isOpen = menu.classList.toggle('open');
-    btn.classList.toggle('open', isOpen);
-    btn.setAttribute('aria-expanded', String(isOpen));
+    var open=m.classList.toggle('open');
+    b.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open?'true':'false');
   });
-
-  document.addEventListener('click', function () {
-    menu.classList.remove('open');
-    btn.classList.remove('open');
-    btn.setAttribute('aria-expanded', 'false');
+  document.addEventListener('click',function(){
+    m.classList.remove('open'); b.classList.remove('open');
+    b.setAttribute('aria-expanded','false');
   });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-      menu.classList.remove('open');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.focus();
-    }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){ m.classList.remove('open'); b.classList.remove('open');
+      b.setAttribute('aria-expanded','false'); b.focus(); }
   });
 })();
 </script>
