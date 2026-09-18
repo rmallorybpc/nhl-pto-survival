@@ -38,6 +38,9 @@ season,convert,convert_prior_gp,convert_survived,comparator_key,comparator_team,
 2020-21,Trevor Lewis,56,yes,comeau b,DAL,L,34,0,55,1,same_team,yes
 2020-21,Trevor Lewis,56,yes,malkin e,PIT,C,34,0,55,1,out,no
 2020-21,Trevor Lewis,56,yes,perry c,MTL,R,35,1,57,1,moved,yes
+2021-22,Max McCormick,12,no,johnston r,NYI,L,27,2,12,0,same_team,yes
+2021-22,Max McCormick,12,no,dzingel r,ARI,C,29,0,11,1,out,no
+2021-22,Max McCormick,12,no,simon d,PIT,C,27,2,11,1,out,no
 2021-22,Tyler Ennis,30,no,benn j,DAL,L,32,0,31,1,same_team,yes
 2021-22,Tyler Ennis,30,no,tanev b,SEA,L,30,2,32,2,same_team,yes
 2021-22,Tyler Ennis,30,no,turris k,EDM,C,32,0,27,3,out,no
