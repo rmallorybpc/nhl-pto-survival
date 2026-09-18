@@ -152,5 +152,9 @@ arithmetic errors. Those are listed on the audit page.
 Complete. Analysis finished, site published, dataset released.
 
 Outstanding: source the five estimated camp opening dates, resolve two loose
+
+Reproducibility: a clean checkout with no local files reproduces the
+published differential from scripts/rematch-comparator.py using the
+committed pool caches. Verified September 18, 2026.
 threads on players already excluded, and re-resolve the 2024-25 cohort once
 2025-26 is complete.
