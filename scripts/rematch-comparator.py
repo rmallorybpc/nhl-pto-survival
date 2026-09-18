@@ -188,10 +188,11 @@ def main(K=K, MAX_AGE_GAP=MAX_AGE_GAP, GP_BAND=GP_BAND, quiet=False):
         print("No matches. Check that the prior-season pools exist.")
         return
 
-    with open(OUT, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(matched[0].keys()))
-        w.writeheader()
-        w.writerows(matched)
+    if not quiet:
+        with open(OUT, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(matched[0].keys()))
+            w.writeheader()
+            w.writerows(matched)
 
     # Only converts that actually found comparators enter the differential.
     used_converts = {(m["season"], m["convert"]) for m in matched}
